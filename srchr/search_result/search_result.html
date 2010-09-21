@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>search_result</title>
+	</head>
+	<body>
+		<form action='' id='searchForm'>
+			<input type='text' id='searchVal'/>
+		</form>
+		<a href="javascript://" id='toggle'>Toggle</a>
+		<div id='searchNum'></div>
+        <div id='content'></div>
+		
+		
+		<script type='text/javascript' 
+                src='../../steal/steal.js?srchr/search_result'>   
+        </script>
+		<script type='text/javascript'>
+			SEARCHNUM = 0;
+			Google = {
+				findAll : function(q, success){
+					var results = [];
+					var length = parseInt( Math.random()*100 );
+					for(var i =0; i < length; i++){
+						results.push({
+							title : i+"th search result",
+							text : "foo bar baz",
+							href : "http://blah.com/"+i
+						})
+					}
+					SEARCHNUM++;
+					$("#searchNum").html(SEARCHNUM)
+					success(results)
+				}
+			}
+			
+			$("#content").srchr_search_result({
+				modelType : Google
+			})
+			$("#searchForm").submit(function(ev){
+				ev.preventDefault();
+				$("#searchForm").trigger("search.created",{
+					search : $("#searchVal").val()
+				});
+			})
+			$("#toggle").click(function(){
+				var c =  $("#content")
+				if(c.is(":visible")){
+					c.hide()
+				}else{
+					c.show();
+					c.trigger("show")
+				}
+			})
+		</script>
+	</body>
+</html>

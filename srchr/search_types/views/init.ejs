@@ -1,0 +1,5 @@
+<ul>
+<%for(var title in models){%>
+	<li><input type='checkbox' name="types" value="<%=models[title].fullName%>"/> <%= title %></li>
+<%}%>
+</ul>

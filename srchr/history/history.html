@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>search_history</title>
+	</head>
+	<body>
+        <div id='content'></div>
+		
+		<form id='searchForm' action=''>
+			<input type='text' id='searchText'>
+		</form>
+		<script type='text/javascript' 
+                src='../../steal/steal.js?srchr/history'>   
+        </script>
+		<script type='text/javascript' >
+			$.Model.extend("Search",{
+				id: "search"
+			},{});
+			
+			$("#content").srchr_history({
+				titleHelper : function(search){
+					return search.search;
+				}
+			});
+			
+			
+			
+			$("#searchForm").submit(function(ev){
+				ev.preventDefault();
+				
+				$(this).trigger("search.created",new Search({
+					search : $("#searchText").val()
+				}));
+				$("#searchText").val("")
+			})
+		</script>
+	</body>
+</html>
