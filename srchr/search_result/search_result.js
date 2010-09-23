@@ -3,7 +3,7 @@ steal.plugins('jquery/controller','jquery/view/ejs').then(function($){
 $.Controller.extend("Srchr.SearchResult",{
 	defaults: {
 		listenTo : document.documentElement,
-		resultView : "//srchr/search_result/views/results.ejs"
+		resultView : "//srchr/search_result/views/result.ejs"
 	},
 	listensTo : ["show"]
 },{

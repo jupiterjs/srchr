@@ -41,7 +41,7 @@
 			$("#searchForm").submit(function(ev){
 				ev.preventDefault();
 				$("#searchForm").trigger("search.created",{
-					search : $("#searchVal").val()
+					query : $("#searchVal").val()
 				});
 			})
 			$("#toggle").click(function(){
