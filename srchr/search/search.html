@@ -8,11 +8,21 @@
 	    
         <div id='content'></div>
 		
+		<div id="results"></div>
+		
 		<script type='text/javascript' 
                 src='../../steal/steal.js?srchr/search'>   
         </script>
 		<script type='text/javascript'>
-			$('#content').srchr_search();
+			
+			
+			
+			$('#content').srchr_search()
+				.bind("search.created", function(){
+					$('#results').html('Search created!');
+				})
+			.end();
+			
 		</script>
 	</body>
 </html>
