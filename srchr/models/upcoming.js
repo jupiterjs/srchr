@@ -22,7 +22,7 @@ $.Model.extend("Srchr.Models.Upcoming",{
 	}
 },{
 	
-})
+});
 
 
 });
