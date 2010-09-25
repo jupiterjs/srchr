@@ -17,6 +17,24 @@ $.Controller.extend("Srchr.History",
 		titleHelper : function(instance){
 			return "Item"+instance[instance.Class.id]
 		}
+	},
+	
+	areTypesEqual : function(history1, history2){
+		
+		history1 = history1.types;
+		history2 = history2.types;
+		
+		if (history1.length !== history2.length){
+			return false;
+		}
+		
+		for (var i = 0; i < history1.length; i++){
+			if (history1[i] !== history2[i]){
+				return false;
+			}
+		}
+		
+		return true;
 	}
 },
 {
@@ -26,13 +44,29 @@ $.Controller.extend("Srchr.History",
 		
 		this.bind(this.options.listenTo, "search.created", "created");
 	},
-	created : function(el, ev, instance){
-		if(!this.instances.get(instance).length){
-			this.instances.push(instance);
-			this.addInstances([instance])
+	created : function(el, ev, newInstance){
+		
+		if (!this.matchInstance(newInstance)){
+			this.instances.push(newInstance);
+			this.addInstances([newInstance])
 		}
 		
+		
 	},
+	
+	matchInstance : function(instance){ 
+		
+		for (var i = 0; i < this.instances.length; i++){
+			if (this.instances[i].query == instance.query
+					&& Srchr.History.areTypesEqual(this.instances[i], instance)){
+					
+					return this.instances[i];
+				}
+		}
+		
+		return false;
+	},
+	
 	addInstances : function(instances){
 		this.element.append(this.view('add',{
 			data: instances,

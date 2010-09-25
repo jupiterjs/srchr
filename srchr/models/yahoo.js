@@ -7,7 +7,9 @@ $.Model.extend("Srchr.Models.Yahoo",{
 		    "SELECT * from search.images where query='#{query}'",
 		    params,
 		    function (data) {
-		        success(self.wrapMany(data.query.results.result))
+		    	if (data.query.results){
+		    		success(self.wrapMany(data.query.results.result))
+		    	}
 		    }
 		);
 		
