@@ -46,7 +46,7 @@ $.Controller.extend("Srchr.History",
 	},
 	created : function(el, ev, newInstance){
 		
-		if (!this.matchInstance(newInstance)){
+		if(!this.instances.get(newInstance).length){
 			this.instances.push(newInstance);
 			this.addInstances([newInstance])
 		}
