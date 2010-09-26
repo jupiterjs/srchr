@@ -46,7 +46,7 @@ $.Controller.extend("Srchr.History",
 		this.instances.remove(toBeRemoved);
 		this.instances.store(this.options.storeName);
 		li.fadeOut(function(){
-			el.remove();
+			li.remove();
 		});
 		ev.stopImmediatePropagation()
 	},

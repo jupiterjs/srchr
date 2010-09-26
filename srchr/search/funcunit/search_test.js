@@ -4,17 +4,17 @@ module("srchr/search",{
 	}
 });
 
+
+
+
 test("Empty the search field and blur it", function(){
 	
 	S('input[name=query]').click({}, function(){
 		ok(!S('input[name=query]').text(), 'Text field is empty!')
-		
-		S('html').click({}, function(){
-			ok(S('input[name=query]').text(), 'Text field is filled!')
-			ok(S('input[name=query]').hasClass('blurred'), 'Clicked query box is grayed out')
-		})
-		
-		
+	})
+	S('html').click( function(){
+		ok(S('input[name=query]').val(), 'Text field is filled!')
+		ok(S('input[name=query]').hasClass('blurred'), 'Clicked query box is grayed out')
 	})
 
 });

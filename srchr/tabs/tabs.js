@@ -26,7 +26,10 @@ $.Controller.extend("Srchr.Tabs",{
 	// on an li click, activates new tab  
 	"li click" : function(el, ev){
 		ev.preventDefault();
-		this.activate(el)
+		if(!el.hasClass('disabled')){
+			this.activate(el)
+		}
+		
 	},
 	
 	//hides old activate tab, shows new one

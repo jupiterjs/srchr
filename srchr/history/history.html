@@ -34,6 +34,10 @@
 				}));
 				$("#searchText").val("")
 			})
+			
+			$(document.documentElement).bind("search.selected", function(ev, data){
+				$("#searchText").val(data.search)
+			})
 		</script>
 	</body>
 </html>
