@@ -4,13 +4,15 @@ module("srchr/search",{
 	}
 });
 
-
+var search = function(query){
+	S('input[name=query]').type(query+"\r")
+}
 
 
 test("Empty the search field and blur it", function(){
-	
+	search("foo")
 	S('input[name=query]').click({}, function(){
-		ok(!S('input[name=query]').text(), 'Text field is empty!')
+		ok(!S('input[name=query]').val(), 'Text field is empty!')
 	})
 	S('html').click( function(){
 		ok(S('input[name=query]').val(), 'Text field is filled!')

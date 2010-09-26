@@ -48,7 +48,6 @@ $.Controller.extend("Srchr.SearchResult",{
 	},
 	
 	renderResults: function(data){
-		console.log(data)
 		this.element.html(this.view('results',{data: data, options: this.options }));
 	}
 })

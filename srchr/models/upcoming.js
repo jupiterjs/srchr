@@ -11,11 +11,13 @@ $.Model.extend("Srchr.Models.Upcoming",{
 		    params,
 		    function (data) {
 	
-		        success(self.wrapMany(
-					data.query.count == "1" ? [data.query.results.event]
-					:
-					data.query.results.event
-				))
+		    	if (data.query.results){
+			        success(self.wrapMany(
+						data.query.count == "1" ? [data.query.results.event]
+						:
+						data.query.results.event
+					))
+		    	}
 		    }
 		);
 		

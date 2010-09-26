@@ -7,7 +7,9 @@ $.Model.extend("Srchr.Models.Flickr",{
 		    "SELECT * from flickr.photos.search where has_geo='true' AND text='#{query}'",
 		    params,
 		    function (data) {
-		        success(self.wrapMany(data.query.results.photo))
+		    	if (data.query.results){
+		    		success(self.wrapMany(data.query.results.photo))
+		    	}
 		    }
 		);
 		

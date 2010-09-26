@@ -66,6 +66,8 @@ $.Controller.extend("Srchr.Search",
 		for(var i =0; i < data.types.length; i++){
 			checks.filter("[value="+data.types[i]+"]").attr("checked",true);
 		}
+		
+		$(document.documentElement).trigger('search.created', data);
 	}
 });
 
