@@ -9,7 +9,7 @@ td {padding: 3px;}
 }
 
 #query{
-	font-size: 2em;
+	font-size: 1.25em;
 	width: 420px;
 }
 
@@ -28,7 +28,6 @@ td {padding: 3px;}
 #history-results-container{
 	clear: both;
 	position: relative;
-	top: -30px;
 }
 
 #history-container{
@@ -50,4 +49,12 @@ td {padding: 3px;}
 #history
 {
 	min-height:	300px;
+}
+
+.disabled a{
+	color: #333 !important;
+}
+
+input[type="submit"]{
+	font-size: 1.25em;
 }

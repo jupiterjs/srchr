@@ -11,7 +11,8 @@ steal.plugins('srchr/search',
 	
 	var typePrettyNames = {
 		"Srchr.Models.Flickr" : "f",
-		"Srchr.Models.Yahoo" : "y"
+		"Srchr.Models.Yahoo" : "y",
+		"Srchr.Models.Upcoming" : "u"
 	}
 	
 	$("#history").srchr_history({
@@ -40,7 +41,8 @@ steal.plugins('srchr/search',
 	$("#upcoming").srchr_search_result({
 		modelType : Srchr.Models.Upcoming,
 		resultView : "//srchr/views/upcoming.ejs"
-	});	
+	});
+		
 })
 	
 
