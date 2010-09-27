@@ -1,7 +1,8 @@
 steal.plugins('srchr/search',
 	'srchr/history',
 	'srchr/search_result',
-	'srchr/tabs')
+	'srchr/tabs',
+	'srchr/disabler')
 	.models('flickr','yahoo','upcoming')
 		
 .then(function($){
@@ -24,7 +25,7 @@ steal.plugins('srchr/search',
 		}
 	});	
 	
-	$("#resultsTab").srchr_tabs();
+	$("#resultsTab").srchr_tabs().srchr_disabler();
 	
 	$("#flickr").srchr_search_result({
 		modelType : Srchr.Models.Flickr,

@@ -1,4 +1,4 @@
-steal.plugins('jquery/controller')
+steal.plugins('jquery/controller','jquery/event/default')
 	 .css('tabs')
 	 .then(function(){
 	
@@ -26,12 +26,11 @@ $.Controller.extend("Srchr.Tabs",{
 	// on an li click, activates new tab  
 	"li click" : function(el, ev){
 		ev.preventDefault();
-		if(!el.hasClass('disabled')){
-			this.activate(el)
-		}
-		
+		el.trigger("activate")
 	},
-	
+	"li default.activate" : function(el, ev){
+		this.activate(el)
+	},
 	//hides old activate tab, shows new one
 	activate : function(el){
 		this.tab(this.find('.active').removeClass('active')).hide()
@@ -40,4 +39,3 @@ $.Controller.extend("Srchr.Tabs",{
 })
 	
 })
-	 
