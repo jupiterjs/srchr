@@ -8,24 +8,44 @@ steal.plugins('jquery/controller',
 
 /**
  * Creates a form to search with, searches with it
+ * 
+ * @tag controllers, home
  */
 $.Controller.extend("Srchr.Search",
+/* @static */
 {
 	defaults : {
 		defaultText : "search for things here"
 	}
 },
+/* @prototype */
 {
+	/**
+	 * Initialize a new instance of the Search controller.
+	 */
 	init : function(){
 		this.element.html(this.view(this.options));
 		this.bind(document.documentElement, "search.selected","searchSelected")
 	},
-	flash  : function(el){
+	
+	/**
+	 * Highlights 'el' for 'time' milliseconds.
+	 * 
+	 * @param {Object} el The element to highlight.
+	 * @param {Object|null} time The amount of time to highlight for.  Default is 1000 milliseconds
+	 */
+	flash  : function(el, time){
 		el.addClass('highlight')
 		setTimeout(function(){
 			el.removeClass('highlight')
-		}, 1000);
+		}, parseInt(time) || 1000);
 	},
+	
+	/**
+	 * Binds to the search form submission.  Prevents the default action and fires the "search.created" event. 
+	 * @param {Object} el The event target element.
+	 * @param {Object} ev The event being fired.
+	 */
 	"form submit" : function(el, ev){
 		ev.preventDefault();
 		var search = new Srchr.Models.Search(el.formParams()),
@@ -45,21 +65,44 @@ $.Controller.extend("Srchr.Search",
 		
 		
 	},
+	
+	/**
+	 * Binds on the search box for when it is focused.  Removes the blurred class and removes the default text.
+	 * @param {Object} el The event target element.
+	 * @param {Object} ev The event being fired.
+	 */
 	"input[type=text] focusin" : function(el, ev){
 		if(el.val() == this.options.defaultText){
 			el.val("")
 		}
 		el.removeClass('blurred')
 	},
+	
+	/**
+	 * Binds on the search box for when it is blurred.  Adds the blurred class and inputs the default text if none was provided by the user.
+	 * @param {Object} el The event target element.
+	 * @param {Object} ev The event being fired.
+	 */
 	"input[type=text] focusout" : function(el, ev){
 		if(el.val() == ""){
 			el.val(this.options.defaultText).addClass('blurred')
 		}
 	},
+	
+	/**
+	 * Focuses on the search query box on page load.
+	 */
 	load : function(){
 		//if we are attached when the page loads, focus on our element
 		this.find("input[name=query]")[0].focus()
 	},
+	
+	/*
+	 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search.created. 
+	 * @param {Object} el The event target element.
+	 * @param {Object} ev The event being fired.
+	 * @param {Object} data Data being passed to the event.
+	 */
 	searchSelected : function(el, ev, data){
 		this.find("input[name=query]").val(data.query)[0].focus();
 		var checks = this.find("input[type=checkbox]").attr("checked",false);

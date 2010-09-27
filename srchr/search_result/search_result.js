@@ -1,13 +1,22 @@
 steal.plugins('jquery/controller','jquery/view/ejs').then(function($){
 	
-$.Controller.extend("Srchr.SearchResult",{
+/**
+ * Shows the search results of a query.
+ * @tag controllers, home
+ */
+$.Controller.extend("Srchr.SearchResult",
+/* @static */
+{
 	defaults: {
 		listenTo : document.documentElement,
 		resultView : "//srchr/search_result/views/result.ejs"
 	},
 	listensTo : ["show"]
-},{
+},
+/* @prototype */
+{
 	/**
+	 * Initializes a new instance of Search Results container.
 	 * @codestart
 	 * $(selector).srchr_search_result({
 	 * 	modelType : Srchr.Models.Google,
@@ -19,6 +28,12 @@ $.Controller.extend("Srchr.SearchResult",{
 		this.bind(this.options.listenTo, "search.created", "created");
 	},
 	
+	/**
+	 * If the results panel is visible, then get the results.
+	 * @param {Object} el The element that the event was called on.
+	 * @param {Object} ev The event that was called.
+	 * @param {Object} searchInst The search instance to get results for.
+	 */
 	"created": function(el, ev, searchInst){
 		this.currentSearch = searchInst.query;
 		if (this.element.is(':visible')){
@@ -26,10 +41,16 @@ $.Controller.extend("Srchr.SearchResult",{
 		}
 	},
 	
+	/**
+	 * Show the search results. 
+	 */
 	"show": function(){
 		this.getResults();
 	},
 	
+	/**
+	 * Get the appropriate search results that this Search Results container is supposed to show.
+	 */
 	getResults: function(){
 		// if we have a search
 		if (this.currentSearch){
@@ -47,6 +68,10 @@ $.Controller.extend("Srchr.SearchResult",{
 		
 	},
 	
+	/**
+	 * Bind the data for this controller to its view.
+	 * @param {Object} data The data to bind.
+	 */
 	renderResults: function(data){
 		this.element.html(this.view('results',{data: data, options: this.options }));
 	}
