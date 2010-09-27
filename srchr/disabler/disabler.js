@@ -19,27 +19,26 @@ steal.plugins('jquery/controller','jquery/event/default').then(function($){
 		// Listen for the search type
 		checkTypes: function(el, ev, data){
 			
-			var types = [], 
-				hitFirst = false;
+			var types = {}, 
+				first = true;
 			
 			$.each(data.types, function(index, type){
-				types.push(type.split('.')[2]);
+				types[type.split('.')[2]] = true;
 			})
 			
-			this.element.find('li').addClass('disabled')
-			
-			if (types.length) {
-				for (var i = 0; i < types.length; i++) {
-					var el = this.element.find('a[href$=' + types[i].toLowerCase() + ']').parent()
-					
-					el.removeClass('disabled')
-					
-					if (!hitFirst) {
-						el.trigger('activate')
-						hitFirst = true;
+			this.element.find('li').each(function(){
+				var li = $(this)
+				
+				if(types [ li.text() ]){
+					li.removeClass("disabled")
+					if(first){
+						li.trigger('activate')
+						first = false;
 					}
+				}else{
+					li.addClass("disabled")
 				}
-			}
+			})
 		}
 	})
 })
