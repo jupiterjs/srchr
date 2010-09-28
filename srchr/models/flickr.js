@@ -1,22 +1,20 @@
-steal.plugins("jquery/model").then("yql", function(){
+steal.plugins("jquery/model/service/yql").then(function(){
+//get the yql service
+var flickr = $.Model.service.yql({from: "flickr.photos.search"})
 
 $.Model.extend("Srchr.Models.Flickr",{
 	findAll : function(params, success, error){
-		var self= this;
-		$.yql(
-		    "SELECT * from flickr.photos.search where has_geo='true' AND text='#{query}'",
-		    params,
-		    function (data) {
-		    	if (data.query.results){
-		    		success(self.wrapMany(data.query.results.photo))
-		    	}
-		    }
-		);
+		// convert our query param for use in the flickr service
 		
+		flickr.findAll.call(this, //returns instances of Flickr
+			
+			{ where: ["has_geo='true' AND text='#{query}'",params] }, 
+			success, 
+			error);
+
 	}
-},{
-	
-})
+},{})
 
 
 });
+

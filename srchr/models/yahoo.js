@@ -1,22 +1,20 @@
-steal.plugins("jquery/model").then("yql", function(){
+steal.plugins("jquery/model/service/yql").then(function(){
+//get the yql service
+var yahoo = $.Model.service.yql({from: "search.images"})
 
 $.Model.extend("Srchr.Models.Yahoo",{
 	findAll : function(params, success, error){
-		var self= this;
-		$.yql(
-		    "SELECT * from search.images where query='#{query}'",
-		    params,
-		    function (data) {
-		    	if (data.query.results){
-		    		success(self.wrapMany(data.query.results.result))
-		    	}
-		    }
-		);
+
+		// convert our query param for use in the flickr service
+		yahoo.findAll.call( this,
+			{where: ["query='#{query}'",params]}, 
+			success, 
+			error);
 		
 	}
 },{
 	
-})
+});
 
 
 });

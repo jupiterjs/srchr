@@ -1,30 +1,19 @@
+steal.plugins("jquery/model/service/yql").then(function(){
 
-
-steal.plugins("jquery/model").then("yql", function(){
+//get a yql service for upcoming events
+var upcoming = $.Model.service.yql({from: "upcoming.events"})
 
 $.Model.extend("Srchr.Models.Upcoming",{
 	findAll : function(params, success, error){
-		var self= this;
-		$.yql(
-		    "SELECT * FROM upcoming.events WHERE description LIKE '%#{query}%' OR name LIKE '%#{query}%' or tags='#{query}'",
-			
-		    params,
-		    function (data) {
-	
-		    	if (data.query.results){
-			        success(self.wrapMany(
-						data.query.count == "1" ? [data.query.results.event]
-						:
-						data.query.results.event
-					))
-		    	}
-		    }
-		);
+		var self = this;
+		// convert our query param for use in the flickr service
+		upcoming.findAll.call(this,
+			{ where: ["description LIKE '%#{query}%' OR name LIKE '%#{query}%' OR tags='#{query}'",params] }, 
+			success, 
+			error);
 		
 	}
-},{
-	
-});
+},{})
 
 
 });

@@ -4,7 +4,7 @@ steal.plugins('srchr/search',
 	'srchr/search_result',
 	'srchr/tabs',
 	'srchr/disabler')
-	.models('flickr','yahoo','upcoming')
+	.models('flickr','yahoo','upcoming','twitter')
 		
 .then(function($){
 	
@@ -53,7 +53,12 @@ steal.plugins('srchr/search',
 		modelType : Srchr.Models.Upcoming,
 		resultView : "//srchr/views/upcoming.ejs"
 	});
-		
+	
+	$("#twitter").srchr_search_result({
+		modelType : Srchr.Models.Twitter,
+		resultView : "//srchr/views/twitter.ejs"
+	});
+	
 })
 	
 
