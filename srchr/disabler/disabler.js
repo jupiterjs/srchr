@@ -1,9 +1,17 @@
 steal.plugins('jquery/controller','jquery/event/default').then(function($){
 	
-	/**
-	 * Disables tabs and prevents default behavior.
-	 * @tag controllers, home
-	 */
+/**
+ * Disables tabs and prevents default behavior.  Integrates well with tabs, can be used for other content toggling UI mechanisms as well.
+ * 
+ * @codestart
+$("#resultsTab").srchr_tabs().srchr_disabler();
+@codeend
+ * 
+ * <p>This is an example of implementing the Disabler with the Srchr Tabs controller.<p>
+ * 
+ * <p>The Disabler controller listens for <code>search.created</code> modifies the associated content toggling mechanism with classes accordingly.  It also prevents the default behavior of that mechanisms so that the content is not shown.
+ * @tag controllers, home
+ */
 	$.Controller.extend("Srchr.Disabler",
 	/* @static */
 	{

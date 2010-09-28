@@ -3,8 +3,33 @@ steal.plugins('jquery/controller',
 	'jquery/view/ejs').then(function($){
 
 /**
- * An abstract list widget that listens for items being created,
- * shows them in a list, and then saves them in cookies for later retrieval.  
+ * This is a list widget whose state is maintained across page loads via cookies.
+ * 
+ * @codestart
+var typePrettyNames = {
+	"Srchr.Models.Flickr" : "f",
+	"Srchr.Models.Yahoo" : "y",
+	"Srchr.Models.Upcoming" : "u"
+};
+	
+$("#history").srchr_history({
+	titleHelper : function(search){
+		var text =  search.query,
+			types = [];
+		for(var i=0; i < search.types.length; i++){
+			types.push( typePrettyNames[search.types[i]] );
+		}
+		return  text+" "+types.join();
+	}
+});
+ * @codeend
+ * 
+ * <p><code>#history</code> will listen for the <code>#search.created</code> event.  When <code>#search.created</code> fires, this controller will intercept the search that is being run and display the search query and type as a list element (the actual formatting of the string is determined by the <code>titleHelper</code> option).</p>
+ * 
+ * <p>Clicking on any item in the list will create the new instance of the search that it represents.  It does so by firing <code>search.selected</code>.</p> 
+ * 
+ * <p>This controller also creates an "X" for each item in the list.  Clicking on this "X" will remove the list element from the page.</p>
+ * 
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.History",

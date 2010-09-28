@@ -1,3 +1,34 @@
+/**
+ * @page index home
+ * 
+ * <h1>Srchr demonstration application</h1>
+ * 
+ * <p>Srchr is an example app that consists of all of the components of a JavaScriptMVC application.  It gets a user's query and then performs a search against the desired Yahoo! search services.  It's architecture is comprised of:</p>
+ * <ul>
+ * <li>Models</li>
+ * <li>Controllers</li>
+ * <li>Views</li>
+ * </ul>
+ * 
+ * <h2>The Models</h2>
+ * ...
+ * 
+ * <h2>The Controllers</h2>
+ * 
+ * <p>There are five controllers that make up Srchr:</p>
+ * 
+ * <ul>
+ * <li>Search - Collects the search request from the user.</li>
+ * <li>Search Result - Receives the search request data, executes and displays it.</li>
+ * <li>History - Maintains a list of previous searches and recreates them upon user request.</li>
+ * <li>Tabs - Shows and hides data.</li>
+ * <li>Disabler - Based on the search engines that were or were not selected, this enables and disables the respective sections of the content-toggling mechanism (tabs).</li>
+ * </ul>
+ * 
+ * All of the controllers are designed to work with each other, but also work independantly of each other and be swapped out if need be.  Check out each controller's page to learn about how to use it.
+ * 
+ */
+
 // Load all of the plugin dependencies
 steal.plugins('srchr/search',
 	'srchr/history',
@@ -8,7 +39,7 @@ steal.plugins('srchr/search',
 		
 .then(function($){
 	
-	// This is the Srchr application.  It intergrates all of the Srchr modules.
+	// This is the Srchr application.  It integrates all of the Srchr modules.
 	
 	// Create a new Search controller on the #searchArea element
 	$("#searchArea").srchr_search();
@@ -31,7 +62,7 @@ steal.plugins('srchr/search',
 			}
 			return  text+" "+types.join();
 		}
-	});	
+	});
 	
 	// Create new Tabs and Disabler controllers on the #resultsTab element 
 	$("#resultsTab").srchr_tabs().srchr_disabler();

@@ -5,13 +5,19 @@ steal.plugins('jquery/controller',
 .then(
 	"//srchr/models/search",
 	function($){
-
+		
 /**
- * Creates a form to search with, as well as defining a search type (Model).
+ * This controller creates a form to search with, as well as controls to choose a search engine by (a Model).
  * 
+ * @codestart
+ * $("#searchArea").srchr_search();
+ * @codeend
+ * 
+ * <p><code>#searchArea</code> is populated with form that receives a query and search engine choice from the user.  Once the form is submitted, this controller triggers the <code>search.created</code> event and passes the search query data along with the event.</p>
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.Search",
+		
 /* @static */
 {
 	defaults : {

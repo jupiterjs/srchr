@@ -1,7 +1,16 @@
 steal.plugins('jquery/controller','jquery/view/ejs').then(function($){
 	
 /**
- * Shows the search results of a query.
+ * This controller shows the search results of a query.  It Upon being initialized, it binds on the <code>search.created</code> event.  It uses the model specified in the event data to execute the query, also specified in the event data.
+ * 
+ * @codestart
+ * $("#flickr").srchr_search_result({
+	modelType : Srchr.Models.Flickr,
+	resultView : "//srchr/views/flickr.ejs"
+});
+ * @codeend
+ * 
+ * <p><code>#flickr</code> will be notified when a search is created.  If the search utilizes Srchr.Models.Flickr, then <code>#flickr</code> will be populated with results from Flickr.</p>
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.SearchResult",

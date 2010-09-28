@@ -1,9 +1,28 @@
 steal.plugins('jquery/controller','jquery/event/default')
 	 .css('tabs')
 	 .then(function(){
-	
+			 
 /**
- * Basic tabs controller for showing an hiding content.
+ * A basic tabs controller for showing and hiding content.
+ *
+ * @codestart
+&lt;ul id='resultsTab'&gt;
+	&lt;li&gt;&lt;a href='#flickr'&gt;Flickr&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href='#yahoo'&gt;Yahoo&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href='#upcoming'&gt;Upcoming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div id='flickr'&gt;&lt;/div&gt;
+&lt;div id='yahoo'&gt;&lt;/div&gt;
+&lt;div id='upcoming'&gt;&lt;/div&gt;
+@codeend
+ * 
+ * @codestart
+ $("#resultsTab").srchr_tabs();
+ * @codeend
+ * 
+ * <code>#resultsTab</code> Will be transformed into working tabs that the user can click to use.  The <code>href</code>s must correspond the to the jQuery selector of the content element it represents.
+ * 
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.Tabs",
@@ -28,7 +47,7 @@ $.Controller.extend("Srchr.Tabs",
 	
 	// helper function finds the tab for a given li
 	/**
-	 * Retrieves a tab for a given LI element
+	 * Retrieves a tab contents for a given tab
 	 * @param {Object} li The LI to retrieve the tab for.
 	 */
 	tab : function(li){
