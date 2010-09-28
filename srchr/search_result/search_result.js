@@ -36,6 +36,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 */
 	"created": function(el, ev, searchInst){
 		this.currentSearch = searchInst.query;
+		
 		if (this.element.is(':visible')){
 			this.getResults();
 		}
@@ -52,17 +53,20 @@ $.Controller.extend("Srchr.SearchResult",
 	 * Get the appropriate search results that this Search Results container is supposed to show.
 	 */
 	getResults: function(){
-		// if we have a search
+		// If we have a search...
 		if (this.currentSearch){
 			
 			// and our search is new ...
 			if(this.searched != this.currentSearch){
+				// put placeholder text in the panel...
 				this.element.html("Searching for "+this.currentSearch)
+				// and set a callback to render the results.
 				this.options.modelType.findAll({query: this.currentSearch}, this.callback('renderResults'));
 				this.searched = this.currentSearch
 			}
 			
 		}else{
+			// Tell the user to make a valid query
 			this.element.html("Enter a search term!")
 		}
 		

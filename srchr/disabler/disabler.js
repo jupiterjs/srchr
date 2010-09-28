@@ -44,21 +44,25 @@ steal.plugins('jquery/controller','jquery/event/default').then(function($){
 			var types = {}, 
 				first = true;
 			
+			// Fill the list of types to check against.
 			$.each(data.types, function(index, type){
-				types[type.split('.')[2]] = true;
+				// Model types come in as Srchr.Model.typeName, so just get the last part
+				types[type.split('.').pop()] = true;
 			})
 			
-			this.element.find('li').each(function(){
-				var li = $(this)
+			this.element.find(Srchr.Disabler.defaults.activateSelector).each(function(){
+				var el = $(this)
 				
-				if(types [ li.text() ]){
-					li.removeClass("disabled")
+				// If the Model type we are iterating through is in the list, enable it.
+				// Otherwise, disable it.
+				if(types [ el.text() ]){
+					el.removeClass("disabled")
 					if(first){
-						li.trigger('activate')
+						el.trigger('activate')
 						first = false;
 					}
 				}else{
-					li.addClass("disabled")
+					el.addClass("disabled")
 				}
 			})
 		}

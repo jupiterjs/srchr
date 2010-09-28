@@ -7,7 +7,7 @@ steal.plugins('jquery/controller',
 	function($){
 
 /**
- * Creates a form to search with, searches with it
+ * Creates a form to search with, as well as defining a search type (Model).
  * 
  * @tag controllers, home
  */
@@ -15,7 +15,7 @@ $.Controller.extend("Srchr.Search",
 /* @static */
 {
 	defaults : {
-		defaultText : "search for things here"
+		defaultText : "Search for things here"
 	}
 },
 /* @prototype */
@@ -36,6 +36,7 @@ $.Controller.extend("Srchr.Search",
 	 */
 	flash  : function(el, time){
 		el.addClass('highlight')
+		
 		setTimeout(function(){
 			el.removeClass('highlight')
 		}, parseInt(time) || 1000);
@@ -48,17 +49,23 @@ $.Controller.extend("Srchr.Search",
 	 */
 	"form submit" : function(el, ev){
 		ev.preventDefault();
+		
 		var search = new Srchr.Models.Search(el.formParams()),
 			ok = true;
+		
+		// If no search type was selected, flash the .options UL and don't trigger search.created
 		if(!search.types.length){
 			this.flash(this.find('.options'));
 			ok = false;
 		}
+		
+		// If the default wasn't changed, flash the text field and don't trigger search.created
 		if(search.query == this.options.defaultText){
 			this.flash(this.find('input[type=text]'));
 			ok = false;
 		}
 		
+		// If everything is valid, trigger search.created
 		if(ok){
 			el.trigger("search.created",search);
 		}
@@ -97,7 +104,7 @@ $.Controller.extend("Srchr.Search",
 		this.find("input[name=query]")[0].focus()
 	},
 	
-	/*
+	/**
 	 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search.created. 
 	 * @param {Object} el The event target element.
 	 * @param {Object} ev The event being fired.

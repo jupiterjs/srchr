@@ -6,7 +6,7 @@ module("srchr test", {
 
 var queries = ['hello world', 'jupiter']
 
-function helloWorldSearchSearchCreated(){
+function helloWorldSearchCreate(){
 	ok(S('#yahoo').html(), 'Results were retrieved.')
 	ok(S('#resultsTab li:eq(0)').hasClass('disabled'), "Non-selected tab Flickr is disabled.")
 	ok(!S('#resultsTab li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
@@ -20,7 +20,7 @@ test('Valid query and service loads results and switces to tab', function(){
 	
 	S.wait(3000, function(){
 		
-		helloWorldSearchSearchCreated();
+		helloWorldSearchCreate();
 		
 		ok( (new RegExp(queries[0])).test( S('#history .text:eq(0)').text() ), 'Query appears in the history list.')
 	})
@@ -52,7 +52,7 @@ test('Switching results tabs', function(){
 test('Clicking history entries re-creates the search', function(){
 	S('.srchr_models_search_hello').click(function(){
 		equals(S('#query').val(), queries[0], '"' + queries[0] + '" was put back into the query field')
-		helloWorldSearchSearchCreated()
+		helloWorldSearchCreate()
 	})
 })
 
