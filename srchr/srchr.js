@@ -19,15 +19,15 @@ steal.plugins('srchr/search',
 		"Srchr.Models.Flickr" : "f",
 		"Srchr.Models.Yahoo" : "y",
 		"Srchr.Models.Upcoming" : "u"
-	}
+	};
 	
 	// Create a new History controller on the #history element
 	$("#history").srchr_history({
 		titleHelper : function(search){
-			var text =  search.query
+			var text =  search.query,
 				types = [];
 			for(var i=0; i < search.types.length; i++){
-				types.push( typePrettyNames[search.types[i]] )
+				types.push( typePrettyNames[search.types[i]] );
 			}
 			return  text+" "+types.join();
 		}
@@ -53,13 +53,11 @@ steal.plugins('srchr/search',
 		modelType : Srchr.Models.Upcoming,
 		resultView : "//srchr/views/upcoming.ejs"
 	});
+
 	
 	$("#twitter").srchr_search_result({
 		modelType : Srchr.Models.Twitter,
 		resultView : "//srchr/views/twitter.ejs"
 	});
 	
-})
-	
-
-	 
+});

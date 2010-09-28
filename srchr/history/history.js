@@ -15,7 +15,7 @@ $.Controller.extend("Srchr.History",
 		storeName : "searchHistory",
 		//returns html to be displayed for each item on the list
 		titleHelper : function(instance){
-			return "Item"+instance[instance.Class.id]
+			return "Item"+instance[instance.Class.id];
 		}
 	}
 },
@@ -26,8 +26,8 @@ $.Controller.extend("Srchr.History",
 	 */
 	ready : function(){
 		
-		this.instances = new $.Model.List.Cookie([]).retrieve(this.options.storeName)
-		this.addInstances(this.instances)
+		this.instances = new $.Model.List.Cookie([]).retrieve(this.options.storeName);
+		this.addInstances(this.instances);
 		this.bind(this.options.listenTo, "search.created", "created");
 	},
 	
@@ -41,7 +41,7 @@ $.Controller.extend("Srchr.History",
 		
 		if(!this.instances.get(newInstance).length){
 			this.instances.push(newInstance);
-			this.addInstances([newInstance])
+			this.addInstances([newInstance]);
 		}
 	},
 	
@@ -71,7 +71,7 @@ $.Controller.extend("Srchr.History",
 		li.fadeOut(function(){
 			li.remove();
 		});
-		ev.stopImmediatePropagation()
+		ev.stopImmediatePropagation();
 	},
 	
 	/**
@@ -80,8 +80,8 @@ $.Controller.extend("Srchr.History",
 	 * @param {Object} ev The event that was fired.
 	 */
 	"li click" : function(el, ev){
-		$(this.options.listenTo).trigger("search.selected", el.model())
+		$(this.options.listenTo).trigger("search.selected", el.model());
 	}
-})
+});
 	
 });

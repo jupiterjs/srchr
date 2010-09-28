@@ -19,7 +19,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 * Initializes a new instance of Search Results container.
 	 * @codestart
 	 * $(selector).srchr_search_result({
-	 * 	modelType : Srchr.Models.Google,
+	 *	modelType : Srchr.Models.Google,
 	 *  listenTo : $('#searchBox')
 	 * })
 	 * @codeend
@@ -59,15 +59,15 @@ $.Controller.extend("Srchr.SearchResult",
 			// and our search is new ...
 			if(this.searched != this.currentSearch){
 				// put placeholder text in the panel...
-				this.element.html("Searching for "+this.currentSearch)
+				this.element.html("Searching for "+this.currentSearch);
 				// and set a callback to render the results.
 				this.options.modelType.findAll({query: this.currentSearch}, this.callback('renderResults'));
-				this.searched = this.currentSearch
+				this.searched = this.currentSearch;
 			}
 			
 		}else{
 			// Tell the user to make a valid query
-			this.element.html("Enter a search term!")
+			this.element.html("Enter a search term!");
 		}
 		
 	},
@@ -79,7 +79,7 @@ $.Controller.extend("Srchr.SearchResult",
 	renderResults: function(data){
 		this.element.html(this.view('results',{data: data, options: this.options }));
 	}
-})
+});
 	
 });
 	 

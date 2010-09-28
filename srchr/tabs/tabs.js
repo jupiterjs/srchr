@@ -17,13 +17,13 @@ $.Controller.extend("Srchr.Tabs",
 	init : function(el){
 	
 		// activate the first tab
-		this.activate( $(el).children("li:first") )
+		this.activate( $(el).children("li:first") );
 		
 		// hide other tabs
 		var tab = this.tab;
 		this.element.addClass('ui-helper-clearfix').children("li:gt(0)").each(function(){
-			tab($(this)).hide()
-		})
+			tab($(this)).hide();
+		});
 	},
 	
 	// helper function finds the tab for a given li
@@ -32,7 +32,7 @@ $.Controller.extend("Srchr.Tabs",
 	 * @param {Object} li The LI to retrieve the tab for.
 	 */
 	tab : function(li){
-		return $(li.find("a").attr("href"))
+		return $(li.find("a").attr("href"));
 	},
 	
 	// on an li click, activates new tab 
@@ -43,7 +43,7 @@ $.Controller.extend("Srchr.Tabs",
 	 */
 	"li click" : function(el, ev){
 		ev.preventDefault();
-		el.trigger("activate")
+		el.trigger("activate");
 	},
 	
 	/**
@@ -52,7 +52,7 @@ $.Controller.extend("Srchr.Tabs",
 	 * @param {Object} ev The event that was fired.
 	 */
 	"li default.activate" : function(el, ev){
-		this.activate(el)
+		this.activate(el);
 	},
 	
 	/**
@@ -60,9 +60,9 @@ $.Controller.extend("Srchr.Tabs",
 	 * @param {Object} The element to show.
 	 */
 	activate : function(el){
-		this.tab(this.find('.active').removeClass('active')).hide()
+		this.tab(this.find('.active').removeClass('active')).hide();
 		this.tab(el.addClass('active')).show().trigger("show");
 	}
-})
+});
 	
-})
+});

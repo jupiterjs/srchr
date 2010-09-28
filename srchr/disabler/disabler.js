@@ -48,23 +48,23 @@ steal.plugins('jquery/controller','jquery/event/default').then(function($){
 			$.each(data.types, function(index, type){
 				// Model types come in as Srchr.Model.typeName, so just get the last part
 				types[type.split('.').pop()] = true;
-			})
+			});
 			
 			this.element.find(Srchr.Disabler.defaults.activateSelector).each(function(){
-				var el = $(this)
+				var el = $(this);
 				
 				// If the Model type we are iterating through is in the list, enable it.
 				// Otherwise, disable it.
 				if(types [ el.text() ]){
-					el.removeClass("disabled")
+					el.removeClass("disabled");
 					if(first){
-						el.trigger('activate')
+						el.trigger('activate');
 						first = false;
 					}
 				}else{
-					el.addClass("disabled")
+					el.addClass("disabled");
 				}
-			})
+			});
 		}
-	})
-})
+	});
+});
