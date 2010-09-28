@@ -25,7 +25,7 @@ $.Controller.extend("Srchr.Search",
 	 */
 	init : function(){
 		this.element.html(this.view(this.options));
-		this.bind(document.documentElement, "search.selected","searchSelected")
+		this.bind(document.documentElement, "search.selected","searchSelected");
 	},
 	
 	/**
@@ -35,11 +35,11 @@ $.Controller.extend("Srchr.Search",
 	 * @param {Object|null} time The amount of time to highlight for.  Default is 1000 milliseconds
 	 */
 	flash  : function(el, time){
-		el.addClass('highlight')
+		el.addClass('highlight');
 		
 		setTimeout(function(){
-			el.removeClass('highlight')
-		}, parseInt(time) || 1000);
+			el.removeClass('highlight');
+		}, +time || 1000, 10);
 	},
 	
 	/**
@@ -80,9 +80,9 @@ $.Controller.extend("Srchr.Search",
 	 */
 	"input[type=text] focusin" : function(el, ev){
 		if(el.val() == this.options.defaultText){
-			el.val("")
+			el.val("");
 		}
-		el.removeClass('blurred')
+		el.removeClass('blurred');
 	},
 	
 	/**
@@ -91,8 +91,8 @@ $.Controller.extend("Srchr.Search",
 	 * @param {Object} ev The event being fired.
 	 */
 	"input[type=text] focusout" : function(el, ev){
-		if(el.val() == ""){
-			el.val(this.options.defaultText).addClass('blurred')
+		if(el.val() === ""){
+			el.val(this.options.defaultText).addClass('blurred');
 		}
 	},
 	
@@ -101,7 +101,7 @@ $.Controller.extend("Srchr.Search",
 	 */
 	load : function(){
 		//if we are attached when the page loads, focus on our element
-		this.find("input[name=query]")[0].focus()
+		this.find("input[name=query]")[0].focus();
 	},
 	
 	/**
