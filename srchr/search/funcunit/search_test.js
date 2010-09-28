@@ -10,21 +10,23 @@ var search = function(query){
 
 
 test("Empty the search field and blur it", function(){
-	search("foo")
-	S('input[name=query]').click({}, function(){
-		ok(!S('input[name=query]').val(), 'Text field is empty!')
+	S('input[name=query]').click(function(){
+		ok(!S('input[name=query]').val().length, 'Text field is empty!')
 	})
+	
 	S('html').click( function(){
+		
+		
 		ok(S('input[name=query]').val(), 'Text field is filled!')
 		ok(S('input[name=query]').hasClass('blurred'), 'Clicked query box is grayed out')
 	})
 
 });
 
+
 test("Selected search box is not blurred and is empty", function(){
 	
 	S('input[name=query]').click({}, function(){
-		//ok(!S('input[name=query]').text(), 'Clicked query box is empty')
 		ok(!S('input[name=query]').hasClass('blurred'), 'Clicked query box is not grayed out')
 	})
 });
