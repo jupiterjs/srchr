@@ -7,10 +7,10 @@ module("srchr test", {
 var queries = ['hello world', 'jupiter']
 
 function helloWorldSearchCreate(){
-	ok(S('#yahoo').html(), 'Results were retrieved.')
-	ok(S('#resultsTab li:eq(0)').hasClass('disabled'), "Non-selected tab Flickr is disabled.")
-	ok(!S('#resultsTab li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
-	ok(S('#resultsTab li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
+	ok(S('#Yahoo').html(), 'Results were retrieved.')
+	ok(S('#resultTabs li:eq(0)').hasClass('disabled'), "Non-selected tab Flickr is disabled.")
+	ok(!S('#resultTabs li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
+	ok(S('#resultTabs li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
 }
 
 test('Valid query and service loads results and switces to tab', function(){
@@ -34,15 +34,15 @@ test('Switching results tabs', function(){
 	S('#query').click().type(queries[1] + '\r');
 	
 	S.wait(3000, function(){
-		ok(!S('#resultsTab li:eq(0)').hasClass('disabled'), "Selected tab Flickr is enabled.")
-		ok(!S('#resultsTab li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
-		ok(S('#resultsTab li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
+		ok(!S('#resultTabs li:eq(0)').hasClass('disabled'), "Selected tab Flickr is enabled.")
+		ok(!S('#resultTabs li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
+		ok(S('#resultTabs li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
 		
-		equals(S('#flickr').css('display'), 'block', 'Flickr results panel is visible')
+		equals(S('#Flickr').css('display'), 'block', 'Flickr results panel is visible')
 		
-		S('#resultsTab li:eq(1)').click(function(){
-			equals(S('#flickr').css('display'), 'none', 'Flickr results panel is hidden')
-			equals(S('#yahoo').css('display'), 'block', 'Yahoo results panel is hidden')
+		S('#resultTabs li:eq(1)').click(function(){
+			equals(S('#Flickr').css('display'), 'none', 'Flickr results panel is hidden')
+			equals(S('#Yahoo').css('display'), 'block', 'Yahoo results panel is hidden')
 		})
 		
 		
