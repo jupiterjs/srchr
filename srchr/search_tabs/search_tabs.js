@@ -7,17 +7,19 @@ steal.plugins(
 		/**
 		 * This plugin generates tabs HTML that is compliant with the Srchr Tabs controller.
 		 * It accepts the Srchr.Models object and dynamically creates the tabs HTML inside of the
-		 * UL that it was called on.  It also creates the content areas that the tabs will operate on.
+		 * UL that it was called on.  It also creates the content areas that the tabs will operate
+		 * on.  Finally, it calls srchr_tabs() and srchr_disabler() to return tabs that are ready 
+		 * for use by other areas of the application.
 		 * 
 		 * @codestart
-	&lt;ul id='resultTabs'&gt;&lt;/ul&gt;
+&lt;ul id='resultTabs'&gt;&lt;/ul&gt;
 	@codeend
 		 * 
 		 * @codestart
-	$("#resultTabs").search_tabs(Srchr.Models);
+$("#resultTabs").search_tabs(Srchr.Models);
 		 * @codeend
 		 * 
-		 * All this plugin needs to work is HTML and JS as above.  Individual tabs are created except for "Search" since it is the superclass.
+		 * All this plugin needs to work is HTML and JS as above.  Individual tabs are created for each model except for "Search," since it is the superclass.
 		 * 
 		 * @return jQuery
 		 * @tag plugins, home
