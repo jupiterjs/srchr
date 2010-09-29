@@ -34,6 +34,7 @@ steal.plugins('srchr/search',
 	'srchr/history',
 	'srchr/search_result',
 	'srchr/tabs',
+	'srchr/search_tabs',
 	'srchr/disabler')
 	.models('flickr','yahoo','upcoming')
 		
@@ -65,22 +66,25 @@ steal.plugins('srchr/search',
 	});
 	
 	// Create new Tabs and Disabler controllers on the #resultsTab element 
-	$("#resultsTab").srchr_tabs().srchr_disabler();
+	$("#resultTabs")
+		.search_tabs(Srchr.Models)
+		.srchr_tabs()
+		.srchr_disabler();
 	
 	// Create new Search Results controller on the #flickr element 
-	$("#flickr").srchr_search_result({
+	$("#Flickr").srchr_search_result({
 		modelType : Srchr.Models.Flickr,
 		resultView : "//srchr/views/flickr.ejs"
 	});
 	
 	// Create new Search Results controller on the #yahoo element
-	$("#yahoo").srchr_search_result({
+	$("#Yahoo").srchr_search_result({
 		modelType : Srchr.Models.Yahoo,
 		resultView : "//srchr/views/yahoo.ejs"
 	});
 	
 	// Create new Search Results controller on the #upcoming element
-	$("#upcoming").srchr_search_result({
+	$("#Upcoming").srchr_search_result({
 		modelType : Srchr.Models.Upcoming,
 		resultView : "//srchr/views/upcoming.ejs"
 	});
