@@ -1,5 +1,11 @@
 (function( $ ){
 
+	/**
+	 * This plugin generates tabs HTML that is compliant with the Srchr Tabs controller.
+	 * It accepts the Srchr.Models object and dynamically creates the tabs HTML inside of the
+	 * UL that it was called on.
+	 * 
+	 */
 $.fn.search_tabs = function(models) {
   
 	var modelsArr = [], lastModel;
