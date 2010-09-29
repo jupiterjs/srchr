@@ -11,7 +11,7 @@
  * </ul>
  * 
  * <h2>The Models</h2>
- * ...
+ * Coming soon!
  * 
  * <h2>The Controllers</h2>
  * 
@@ -33,9 +33,7 @@
 steal.plugins('srchr/search',
 	'srchr/history',
 	'srchr/search_result',
-	'srchr/tabs',
-	'srchr/search_tabs',
-	'srchr/disabler')
+	'srchr/search_tabs')
 	.models('flickr','yahoo','upcoming')
 		
 .then(function($){
@@ -66,10 +64,7 @@ steal.plugins('srchr/search',
 	});
 	
 	// Create new Tabs and Disabler controllers on the #resultsTab element 
-	$("#resultTabs")
-		.search_tabs(Srchr.Models)
-		.srchr_tabs()
-		.srchr_disabler();
+	$("#resultTabs").srchr_search_tabs(Srchr.Models);
 	
 	// Create new Search Results controller on the #flickr element 
 	$("#Flickr").srchr_search_result({
