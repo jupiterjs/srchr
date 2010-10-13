@@ -30,6 +30,8 @@ $("#history").srchr_history({
  * 
  * <p>This controller also creates an "X" for each item in the list.  Clicking on this "X" will remove the list element from the page.</p>
  * 
+ * <p>Since this module makes use of cookies, it must be running from some type of server, not file:///.  Localhost will work correctly.</p>
+ * 
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.History",
