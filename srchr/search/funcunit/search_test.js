@@ -4,8 +4,14 @@ module("srchr/search",{
 	}
 });
 
-var search = function(query){
+function search(query){
 	S('input[name=query]').type(query+"\r")
+}
+	
+// This wait is needed because IE is slow to clear out the textbox when clicked
+function clearout(){
+	S('input[name=query]').click()
+	S('input[name=query]').val(new String())
 }
 
 
@@ -41,6 +47,8 @@ test("Submit form with no query and no type", function(){
 });
 
 test("Submit form with a query but no type", function(){
+	clearout()
+	
 	S('input[name=query]').type('hello world')
 	S('input[type=submit]').click()
 	
@@ -50,6 +58,8 @@ test("Submit form with a query but no type", function(){
 });
 
 test("Submit form with a valid query and type", function(){
+	
+	clearout()
 	
 	S('input[name=query]').type('testing...', function(){
 		S('input[type=checkbox]:eq(0)').click({}, function(){

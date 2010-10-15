@@ -5,8 +5,6 @@ module("srchr/history",{
 });
 
 
-
-
 test("Add and remove history", function(){
 	
 	S("#searchText").type("hello world\r", function(){
@@ -20,6 +18,7 @@ test("Add and remove history", function(){
 	S(".search:contains('hello world')").size(0, function(){
 		ok("no more world")
 	});
+
 });
 
 
@@ -30,12 +29,9 @@ test("add and refresh", function(){
 		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
 		
 	});
-	S.open('//srchr/history/history.html', function(){
-		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
-	});
+	
 	S(".search:contains('hello world')").find(".remove").click()
 })
-
 
 test("populate search", function(){
 	S("#searchText").type("hello world\r", function(){
@@ -43,13 +39,13 @@ test("populate search", function(){
 		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
 		
 	})
-	.type("[ctrl]a[ctrl-up]\b");
+	//.type("[ctrl]a[ctrl-up]\b");
+	.type("\b\b\b\b\b\b\b\b\b\b\b\b\b")
 	
-	S(".search:contains('hello world')").click( function(){
-		
+	S('.search').visible()
+	
+	S(".search").click( function(){
 		equals( S("#searchText").val(), "hello world" , "hello world is set again" );
 		
 	});
-	
 })
-
