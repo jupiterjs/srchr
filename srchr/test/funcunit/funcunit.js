@@ -5,4 +5,5 @@ steal
  .then("../../search/funcunit/search_test")
  .then("../../search_result/funcunit/search_result_test")
  .then("../../tabs/funcunit/tabs_test")
+ .then("../../search_tabs/funcunit/search_tabs_test")
  .then("srchr_test")
