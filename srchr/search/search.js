@@ -1,131 +1,124 @@
-steal.plugins('jquery/controller',
-	'jquery/dom/form_params',
-	'jquery/view/ejs')
-	.css('search')
-.then(
-	"//srchr/models/search",
-	function($){
-		
-/**
- * This controller creates a form to search with, as well as controls to choose a search engine by (a Model).
- * 
- * @codestart
- * $("#searchArea").srchr_search();
- * @codeend
- * 
- * <p><code>#searchArea</code> is populated with form that receives a query and search engine choice from the user.  Once the form is submitted, this controller triggers the <code>search.created</code> event and passes the search query data along with the event.</p>
- * @tag controllers, home
- */
-$.Controller.extend("Srchr.Search",
-		
-/* @static */
-{
-	defaults : {
-		defaultText : "Search for things here"
-	}
-},
-/* @prototype */
-{
+steal.plugins('jquery/controller', 'jquery/dom/form_params', 'jquery/view/ejs').css('search').then("//srchr/models/search", function( $ ) {
+
 	/**
-	 * Initialize a new instance of the Search controller.
-	 */
-	init : function(){
-		this.element.html(this.view(this.options));
-		this.bind(document.documentElement, "search.selected","searchSelected");
-	},
-	
-	/**
-	 * Highlights 'el' for 'time' milliseconds.
+	 * This controller creates a form to search with, as well as controls to choose a search engine by (a Model).
 	 * 
-	 * @param {Object} el The element to highlight.
-	 * @param {Object|null} time The amount of time to highlight for.  Default is 1000 milliseconds
+	 * @codestart
+	 * $("#searchArea").srchr_search();
+	 * @codeend
+	 * 
+	 * <p><code>#searchArea</code> is populated with form that receives a query and search engine choice from the user.  Once the form is submitted, this controller triggers the <code>search.created</code> event and passes the search query data along with the event.</p>
+	 * @tag controllers, home
 	 */
-	flash  : function(el, time){
-		el.addClass('highlight');
-		
-		setTimeout(function(){
-			el.removeClass('highlight');
-		}, +time || 1000, 10);
-	},
-	
-	/**
-	 * Binds to the search form submission.  Prevents the default action and fires the "search.created" event. 
-	 * @param {Object} el The event target element.
-	 * @param {Object} ev The event being fired.
-	 */
-	"form submit" : function(el, ev){
-		ev.preventDefault();
-		
-		var search = new Srchr.Models.Search(el.formParams()),
-			ok = true;
-		
-		// If no search type was selected, flash the .options UL and don't trigger search.created
-		if(!search.types.length){
-			this.flash(this.find('.options'));
-			ok = false;
-		}
-		
-		// If the default wasn't changed, flash the text field and don't trigger search.created
-		if(search.query == this.options.defaultText){
-			this.flash(this.find('input[type=text]'));
-			ok = false;
-		}
-		
-		// If everything is valid, trigger search.created
-		if(ok){
-			el.trigger("search.created",search);
-		}
-		
-		
-	},
-	
-	/**
-	 * Binds on the search box for when it is focused.  Removes the blurred class and removes the default text.
-	 * @param {Object} el The event target element.
-	 * @param {Object} ev The event being fired.
-	 */
-	"input[type=text] focusin" : function(el, ev){
-		if(el.val() == this.options.defaultText){
-			el.val("");
-		}
-		el.removeClass('blurred');
-	},
-	
-	/**
-	 * Binds on the search box for when it is blurred.  Adds the blurred class and inputs the default text if none was provided by the user.
-	 * @param {Object} el The event target element.
-	 * @param {Object} ev The event being fired.
-	 */
-	"input[type=text] focusout" : function(el, ev){
-		if(el.val() === ""){
-			el.val(this.options.defaultText).addClass('blurred');
+	$.Controller.extend("Srchr.Search",
+
+	/* @static */
+	{
+		defaults: {
+			defaultText: "Search for things here"
 		}
 	},
-	
-	/**
-	 * Focuses on the search query box on page load.
-	 */
-	load : function(){
-		//if we are attached when the page loads, focus on our element
-		this.find("input[name=query]")[0].focus();
-	},
-	
-	/**
-	 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search.created. 
-	 * @param {Object} el The event target element.
-	 * @param {Object} ev The event being fired.
-	 * @param {Object} data Data being passed to the event.
-	 */
-	searchSelected : function(el, ev, data){
-		this.find("input[name=query]").val(data.query)[0].focus();
-		var checks = this.find("input[type=checkbox]").attr("checked",false);
-		for(var i =0; i < data.types.length; i++){
-			checks.filter("[value="+data.types[i]+"]").attr("checked",true);
+	/* @prototype */
+	{
+		/**
+		 * Initialize a new instance of the Search controller.
+		 */
+		init: function() {
+			this.element.html(this.view(this.options));
+			this.bind(document.documentElement, "search.selected", "searchSelected");
+		},
+
+		/**
+		 * Highlights 'el' for 'time' milliseconds.
+		 * 
+		 * @param {Object} el The element to highlight.
+		 * @param {Object|null} time The amount of time to highlight for.  Default is 1000 milliseconds
+		 */
+		flash: function( el, time ) {
+			el.addClass('highlight');
+
+			setTimeout(function() {
+				el.removeClass('highlight');
+			}, +time || 1000, 10);
+		},
+
+		/**
+		 * Binds to the search form submission.  Prevents the default action and fires the "search.created" event. 
+		 * @param {Object} el The event target element.
+		 * @param {Object} ev The event being fired.
+		 */
+		"form submit": function( el, ev ) {
+			ev.preventDefault();
+
+			var search = new Srchr.Models.Search(el.formParams()),
+				ok = true;
+
+			// If no search type was selected, flash the .options UL and don't trigger search.created
+			if (!search.types.length ) {
+				this.flash(this.find('.options'));
+				ok = false;
+			}
+
+			// If the default wasn't changed, flash the text field and don't trigger search.created
+			if ( search.query == this.options.defaultText ) {
+				this.flash(this.find('input[type=text]'));
+				ok = false;
+			}
+
+			// If everything is valid, trigger search.created
+			if ( ok ) {
+				el.trigger("search.created", search);
+			}
+
+
+		},
+
+		/**
+		 * Binds on the search box for when it is focused.  Removes the blurred class and removes the default text.
+		 * @param {Object} el The event target element.
+		 * @param {Object} ev The event being fired.
+		 */
+		"input[type=text] focusin": function( el, ev ) {
+			if ( el.val() == this.options.defaultText ) {
+				el.val("");
+			}
+			el.removeClass('blurred');
+		},
+
+		/**
+		 * Binds on the search box for when it is blurred.  Adds the blurred class and inputs the default text if none was provided by the user.
+		 * @param {Object} el The event target element.
+		 * @param {Object} ev The event being fired.
+		 */
+		"input[type=text] focusout": function( el, ev ) {
+			if ( el.val() === "" ) {
+				el.val(this.options.defaultText).addClass('blurred');
+			}
+		},
+
+		/**
+		 * Focuses on the search query box on page load.
+		 */
+		load: function() {
+			//if we are attached when the page loads, focus on our element
+			this.find("input[name=query]")[0].focus();
+		},
+
+		/**
+		 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search.created. 
+		 * @param {Object} el The event target element.
+		 * @param {Object} ev The event being fired.
+		 * @param {Object} data Data being passed to the event.
+		 */
+		searchSelected: function( el, ev, data ) {
+			this.find("input[name=query]").val(data.query)[0].focus();
+			var checks = this.find("input[type=checkbox]").attr("checked", false);
+			for ( var i = 0; i < data.types.length; i++ ) {
+				checks.filter("[value=" + data.types[i] + "]").attr("checked", true);
+			}
+
+			$(document.documentElement).trigger('search.created', data);
 		}
-		
-		$(document.documentElement).trigger('search.created', data);
-	}
-});
+	});
 
 });
-	 

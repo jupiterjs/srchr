@@ -1,73 +1,73 @@
-module("srchr test", { 
-	setup: function(){
-        S.open("//srchr/srchr.html");
+module("srchr test", {
+	setup: function() {
+		S.open("//srchr/srchr.html");
 	}
 });
 
 var queries = ['hello world', 'jupiter']
 
-function helloWorldSearchCreate(){
+function helloWorldSearchCreate() {
 	ok(S('#Yahoo').html(), 'Results were retrieved.');
 	ok(S('#resultTabs li:eq(0)').hasClass('disabled'), "Non-selected tab Flickr is disabled.");
 	ok(!S('#resultTabs li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.");
 	ok(S('#resultTabs li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.");
 }
 
-test('Valid query and service loads results and switces to tab', function(){
-	
+test('Valid query and service loads results and switces to tab', function() {
+
 	S('input[value=Srchr.Models.Yahoo]').click();
-	S('#query').click().type(queries[0] + '\r', function(){
-		
+	S('#query').click().type(queries[0] + '\r', function() {
+
 		helloWorldSearchCreate();
-		
-		ok( (new RegExp(queries[0])).test( S('#history .text:eq(0)').text() ), 'Query appears in the history list.');
-	});	
+
+		ok((new RegExp(queries[0])).test(S('#history .text:eq(0)').text()), 'Query appears in the history list.');
+	});
 });
 
-test('Switching results tabs', function(){
+test('Switching results tabs', function() {
 	S('input[value=Srchr.Models.Yahoo]').click();
 	S('input[value=Srchr.Models.Flickr]').click();
-	
-	S('#query').click().type(queries[1] + '\r', function(){
+
+	S('#query').click().type(queries[1] + '\r', function() {
 		ok(!S('#resultTabs li:eq(0)').hasClass('disabled'), "Selected tab Flickr is enabled.");
 		ok(!S('#resultTabs li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.");
 		ok(S('#resultTabs li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.");
-		
+
 		equals(S('#Flickr').css('display'), 'block', 'Flickr results panel is visible');
-		
-		S('#resultTabs li:eq(1)').click(function(){
+
+		S('#resultTabs li:eq(1)').click(function() {
 			equals(S('#Flickr').css('display'), 'none', 'Flickr results panel is hidden');
 			equals(S('#Yahoo').css('display'), 'block', 'Yahoo results panel is hidden');
 		});
 	});
 });
 
-test('Clicking history entries re-creates the search', function(){
-	S('.srchr_models_search_hello').click(function(){
+test('Clicking history entries re-creates the search', function() {
+	S('.srchr_models_search_hello').click(function() {
 		equals(S('#query').val(), queries[0], '"' + queries[0] + '" was put back into the query field');
 		helloWorldSearchCreate();
 	});
 });
 
-test('History entries are unique', function(){
+test('History entries are unique', function() {
 	S('input[value=Srchr.Models.Yahoo]').click();
 	S('#query').click().type(queries[0] + '\r');
-	
+
 	equals(S('#history li').size(), 2, 'A duplicate History entry was not added');
 });
 
-test('Refresh the page does not change the state of the history list', function(){
-	S.open("//srchr/srchr.html", function(){
-		
+test('Refresh the page does not change the state of the history list', function() {
+	S.open("//srchr/srchr.html", function() {
+
 		equals(S('#history li').size(), 2, 'The History list persisted across the page loads');
 	});
 });
 
-test('All history entries are deletable', function(){
-	for (var i = S('#history li').size() - 1; i > -1; i--){
+test('All history entries are deletable', function() {
+	for ( var i = S('#history li').size() - 1; i > -1; i-- ) {
 		S('#history li a.remove:eq(' + i + ')').click();
 	}
-	
+
 	S('#history li').size(0);
 	ok(S('#history li').size(), 'All history entries were removed.');
 });

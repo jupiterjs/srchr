@@ -1,2 +1,1 @@
-steal
- .plugins("funcunit").then('disabler_test')
+steal.plugins("funcunit").then('disabler_test')

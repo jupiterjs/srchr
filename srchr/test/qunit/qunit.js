@@ -1,3 +1,1 @@
-steal
-  .plugins("funcunit/qunit", "srchr")
-  .then("srchr_test");
+steal.plugins("funcunit/qunit", "srchr").then("srchr_test");
