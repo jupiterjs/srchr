@@ -50,7 +50,9 @@ td {padding: 3px;}
 {
 	min-height:	300px;
 }
-
+.srchr_history .search {
+	cursor: pointer;
+}
 .disabled a{
 	color: #333 !important;
 }

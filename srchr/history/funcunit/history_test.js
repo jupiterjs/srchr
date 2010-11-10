@@ -7,49 +7,38 @@ module("srchr/history",{
 
 
 
-test("Add and remove history", function(){
+test("Add and remove history", 2, function(){
 	
-	S("#searchText").type("hello world\r", function(){
+	S("#description").type("Trash\r", function(){
 		
-		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
+		equals( S(".todo:contains('Trash')").size(), 1 , "there is one todo" );
 		
 	});
 	
-	S(".search:contains('hello world')").find(".remove").click()
+	S(".todo:contains('Trash')").find(".remove").click()
 	
-	S(".search:contains('hello world')").size(0, function(){
-		ok("no more world")
+	S(".todo:contains('Trash')").size(0, function(){
+		ok(true,"no more todos")
 	});
 });
 
 
-test("add and refresh", function(){
+test("add and refresh", 3, function(){
 	
-	S("#searchText").type("hello world\r", function(){
+	S("#description").type("Trash\r", function(){
 		
-		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
+		equals( S(".todo:contains('Trash')").size(), 1 , "there is one todo" );
 		
 	});
 	S.open('//srchr/history/history.html', function(){
-		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
+		equals( S(".todo:contains('Trash')").size(), 1 , "there is one todo after refresh" );
 	});
-	S(".search:contains('hello world')").find(".remove").click()
+	S(".todo:contains('Trash')").find(".remove").click();
+	
+	S(".todo:contains('Trash')").size(0, function(){
+		ok(true, "no more todos")
+	});
 })
 
 
-test("populate search", function(){
-	S("#searchText").type("hello world\r", function(){
-		
-		equals( S(".search:contains('hello world')").size(), 1 , "there is one hello world" );
-		
-	})
-	.type("[ctrl]a[ctrl-up]\b");
-	
-	S(".search:contains('hello world')").click( function(){
-		
-		equals( S("#searchText").val(), "hello world" , "hello world is set again" );
-		
-	});
-	
-})
 

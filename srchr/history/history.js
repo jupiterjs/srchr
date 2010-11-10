@@ -3,15 +3,15 @@ steal.plugins('jquery/controller',
 	'jquery/view/ejs').then(function($){
 
 /**
- * An abstract list widget that listens for items being created,
- * shows them in a list, and then saves them in cookies for later retrieval.  
+ * Provides a cookie-stored list of model instances. 
+ * It allows you to remove these items from the list. 
  * @tag controllers, home
  */
 $.Controller.extend("Srchr.History",
 /* @static */
 {
 	defaults : {
-		listenTo : document.documentElement,
+		//what cookie to store this in
 		storeName : "searchHistory",
 		//returns html to be displayed for each item on the list
 		titleHelper : function(instance){
@@ -22,26 +22,22 @@ $.Controller.extend("Srchr.History",
 /* @prototype */
 {
 	/**
-	 * Sets up a new instance of History controller.
+	 * Waits for the page to be loaded
 	 */
 	ready : function(){
-		
 		this.instances = new $.Model.List.Cookie([]).retrieve(this.options.storeName);
-		this.addInstances(this.instances);
-		this.bind(this.options.listenTo, "search.created", "created");
+		this.append(this.instances);
+		
 	},
-	
 	/**
-	 * Binds on a the "search.created" event.
-	 * @param {Object} el The element that the event was fired on.
-	 * @param {Object} ev The event that was fired.
+	 * Adds an instance to this list.
 	 * @param {Object} newInstance The data to add to the instances list.
 	 */
-	created : function(el, ev, newInstance){
+	add : function(newInstance){
 		
 		if(!this.instances.get(newInstance).length){
 			this.instances.push(newInstance);
-			this.addInstances([newInstance]);
+			this.append([newInstance]);
 		}
 	},
 	
@@ -49,7 +45,8 @@ $.Controller.extend("Srchr.History",
 	 * Add some history entry instances to the list.
 	 * @param {Object} instances The instances to add.
 	 */
-	addInstances : function(instances){
+	append : function(instances){
+		
 		this.element.append(this.view('add',{
 			data: instances,
 			titleHelper : this.options.titleHelper
@@ -75,12 +72,12 @@ $.Controller.extend("Srchr.History",
 	},
 	
 	/**
-	 * Fires "search.selected" and passes el.model().
+	 * Fires "selected" and passes el.model().
 	 * @param {Object} el The history entry that was clicked
 	 * @param {Object} ev The event that was fired.
 	 */
 	"li click" : function(el, ev){
-		$(this.options.listenTo).trigger("search.selected", el.model());
+		el.trigger("selected", el.model())
 	}
 });
 	

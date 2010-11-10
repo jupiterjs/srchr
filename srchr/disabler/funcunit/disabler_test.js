@@ -1,20 +1,37 @@
-module("srchr/search",{
-	setup : function(){
-		S.open('//srchr/disabler/disabler.html')
-	}
+steal.plugins('funcunit').then(function(){
+
+	module("srchr/search",{
+		setup : function(){
+			S.open('//srchr/disabler/disabler.html')
+		}
+	});
+	
+	test('Is a tab disabled?', 3, function(){
+		
+		// make sure that only flickr looks enabled
+		S('button').click(function(){
+			ok(!S('li:eq(0)').hasClass('disabled'), "Flicker is enabled.")
+			ok(S('li:eq(1)').hasClass('disabled'), "Yahoo is disabled.")
+			ok(S('li:eq(2)').hasClass('disabled'), "Upcoming is disabled.")
+		});
+	})
+	
+	test('Is default prevented?', 3, function(){
+		
+		S("a:contains(Yahoo)").click(function(){
+			ok(S('#out').text(), "Activated Yahoo", "Before disabled, default activate is run")
+		});
+		
+		S('button').click();
+		
+		S("a:contains(Upcoming)").click(function(){
+			ok(S('#out').text(), "Activated Yahoo", "Default is prevented")
+		});
+		
+		S("a:contains(Flickr)").click(function(){
+			ok(S('#out').text(), "Activated Flickr", "Default is prevented only on non-matching tabs")
+		});
+		
+	});
+
 });
-
-test('Is a tab disabled?', function(){
-	S('button').click(function(){
-		ok(!S('li:eq(0)').hasClass('disabled'), "Flicker is enabled.")
-		ok(S('li:eq(1)').hasClass('disabled'), "Yahoo is disabled.")
-		ok(S('li:eq(2)').hasClass('disabled'), "Upcoming is disabled.")
-	});
-})
-
-test('Is default prevented?', function(){
-	S('button').click();
-	S('li:eq(1)').click(function(){
-		ok(!S('span').text().length, "Clicking on a disabled link didn't do anything.")
-	});
-})

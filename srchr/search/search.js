@@ -25,7 +25,6 @@ $.Controller.extend("Srchr.Search",
 	 */
 	init : function(){
 		this.element.html(this.view(this.options));
-		this.bind(document.documentElement, "search.selected","searchSelected");
 	},
 	
 	/**
@@ -67,7 +66,7 @@ $.Controller.extend("Srchr.Search",
 		
 		// If everything is valid, trigger search.created
 		if(ok){
-			el.trigger("search.created",search);
+			el.trigger("search",search);
 		}
 		
 		
@@ -105,19 +104,16 @@ $.Controller.extend("Srchr.Search",
 	},
 	
 	/**
-	 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search.created. 
-	 * @param {Object} el The event target element.
-	 * @param {Object} ev The event being fired.
-	 * @param {Object} data Data being passed to the event.
+	 * Updates the checkboxes to reflect the user's desired search engine preferences.  Also fires search. 
 	 */
-	searchSelected : function(el, ev, data){
+	val : function(data){
 		this.find("input[name=query]").val(data.query)[0].focus();
 		var checks = this.find("input[type=checkbox]").attr("checked",false);
 		for(var i =0; i < data.types.length; i++){
 			checks.filter("[value="+data.types[i]+"]").attr("checked",true);
 		}
 		
-		$(document.documentElement).trigger('search.created', data);
+		this.element.trigger('search', data);
 	}
 });
 

@@ -1,4 +1,4 @@
-module("srchr/search_result",{
+module("srchr/tabs",{
 	setup : function(){
 		S.open('//srchr/tabs/tabs.html')
 	}

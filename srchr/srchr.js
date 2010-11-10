@@ -31,7 +31,15 @@ steal.plugins('srchr/search',
 			}
 			return  text+" "+types.join();
 		}
-	});	
+	});
+	// when a search happens, add to history
+	$("#searchArea").bind("search", function(ev, search){
+		$("#history").srchr_history("add", search);
+	});
+	// when a history item is selected, update search
+	$("#history").bind("selected", function(ev, search){
+		$("#searchArea").srchr_search("val", search);
+	});
 	
 	// Create new Tabs and Disabler controllers on the #resultsTab element 
 	$("#resultsTab").srchr_tabs().srchr_disabler();

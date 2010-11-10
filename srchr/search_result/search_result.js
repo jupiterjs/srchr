@@ -25,7 +25,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 * @codeend
 	 */
 	init: function(element, options){
-		this.bind(this.options.listenTo, "search.created", "created");
+		this.bind(this.options.listenTo, "search", "created");
 	},
 	
 	/**

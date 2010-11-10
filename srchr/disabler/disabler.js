@@ -2,6 +2,8 @@ steal.plugins('jquery/controller','jquery/event/default').then(function($){
 	
 	/**
 	 * Disables tabs and prevents default behavior.
+	 * Listens to searches and sets tabs to be disabled / enabled
+	 * and also will prevent clicking on it.
 	 * @tag controllers, home
 	 */
 	$.Controller.extend("Srchr.Disabler",
@@ -50,7 +52,7 @@ steal.plugins('jquery/controller','jquery/event/default').then(function($){
 				types[type.split('.').pop()] = true;
 			});
 			
-			this.element.find(Srchr.Disabler.defaults.activateSelector).each(function(){
+			this.element.find(this.options.activateSelector).each(function(){
 				var el = $(this);
 				
 				// If the Model type we are iterating through is in the list, enable it.

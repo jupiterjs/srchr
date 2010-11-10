@@ -2,42 +2,61 @@
             "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 	<head>
-		<title>search_history</title>
+		<title>srchr.history</title>
+		<style>
+			#list {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border: solid 1px;
+				width: 200px;
+			}
+		</style>
 	</head>
 	<body>
-        <div id='content'></div>
+        <h1>Srchr.History</h1>
+		<p>History provides a cookie-saved list of model instances
+		and a means to remove them from the list.</p>
 		
-		<form id='searchForm' action=''>
-			<input type='text' id='searchText'>
+		<h2>Demo</h2>
+		<p>The following boxes shows the list of items
+		   added to the srchr_history widget:</p>
+		<ul id='list'></ul>
+		<p>Add to the list by entering a todo task:</p>
+		<form id='todoForm' action=''>
+			<input type='text' id='description'>
+			<input type='submit' value='Create Todo' />
 		</form>
+		<p>When you add it, it will appear above.  Refresh the page,
+		   and you should still see it.</p>
+		
 		<script type='text/javascript' 
                 src='../../steal/steal.js?srchr/history'>   
         </script>
 		<script type='text/javascript' >
-			$.Model.extend("Search",{
-				id: "search"
+			$.Model.extend("Todo",{
+				id: "description"
 			},{});
 			
-			$("#content").srchr_history({
-				titleHelper : function(search){
-					return search.search;
-				}
+			$("#list").srchr_history({
+				titleHelper : function(todo){
+					return todo.description;
+				},
+				storeName : "todoCookie"
 			});
 			
 			
 			
-			$("#searchForm").submit(function(ev){
+			$("#todoForm").submit(function(ev){
 				ev.preventDefault();
+				var todo = new Todo({
+					description: $("#description").val()
+				});
 				
-				$(this).trigger("search.created",new Search({
-					search : $("#searchText").val()
-				}));
-				$("#searchText").val("")
+				$("#list").srchr_history("add", todo );
+				
+				$("#description").val("")[0].focus();
 			})
 			
-			$(document.documentElement).bind("search.selected", function(ev, data){
-				$("#searchText").val(data.search)
-			})
 		</script>
 	</body>
 </html>
