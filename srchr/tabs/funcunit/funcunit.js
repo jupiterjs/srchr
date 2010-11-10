@@ -1,2 +1,1 @@
-steal
- .plugins("funcunit").then('tabs_test')
+steal.plugins("funcunit").then('tabs_test')

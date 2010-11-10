@@ -1,2 +1,1 @@
-steal
- .plugins("funcunit").then('history_test')
+steal.plugins("funcunit").then('history_test')

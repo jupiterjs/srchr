@@ -10,11 +10,7 @@ module("srchr", {
 	}
 });
 
-var queries = ['hello world', 'jupiter']
 
-function helloWorldSearchCreate(){
-	
-}
 
 test('Search shows results in selected service', function(){
 	
@@ -60,7 +56,7 @@ test('Switching results tabs', function(){
 
 test('Clicking history entries re-creates the search', function(){
 	S('.srchr_models_search_Dogs').click(function(){
-		equals(S('#query').val(), "Dogs", '"' + queries[0] + '" was put back into the query field')
+		equals(S('#query').val(), "Dogs", 'Dogs was put back into the query field')
 	});
 	S("#yahoo li").exists( function(){
 		ok(true, "We see results in yahoo");

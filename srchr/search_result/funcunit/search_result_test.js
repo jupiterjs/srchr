@@ -7,7 +7,7 @@ module("srchr/search_result",{
 test("results shown", function(){
 	S("#searchVal").type("search\r");
 	S("li").exists(function(){
-		ok(true, "results have been shown")
+		ok(true, "results have been shown");
 	})
 })
 

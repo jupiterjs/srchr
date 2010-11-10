@@ -1,3 +1,4 @@
+
 steal.plugins("jquery/model/service/yql").then(function(){
 
 //get a yql service for upcoming events
@@ -14,6 +15,7 @@ $.Model.extend("Srchr.Models.Upcoming",{
 		
 	}
 },{})
+
 
 
 });

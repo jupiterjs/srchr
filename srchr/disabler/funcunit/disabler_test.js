@@ -2,11 +2,11 @@ steal.plugins('funcunit').then(function(){
 
 	module("srchr/search",{
 		setup : function(){
-			S.open('//srchr/disabler/disabler.html')
+			S.open('//srchr/disabler/disabler.html');
 		}
 	});
 	
-	test('Is a tab disabled?', 3, function(){
+	test('Is a tab disabled?', function(){
 		
 		// make sure that only flickr looks enabled
 		S('button').click(function(){
@@ -16,7 +16,7 @@ steal.plugins('funcunit').then(function(){
 		});
 	})
 	
-	test('Is default prevented?', 3, function(){
+	test('Is default prevented?', function(){
 		
 		S("a:contains(Yahoo)").click(function(){
 			ok(S('#out').text(), "Activated Yahoo", "Before disabled, default activate is run")

@@ -1,3 +1,4 @@
+
 steal.plugins("jquery/model/service/yql").then(function(){
 //get the yql service
 var yahoo = $.Model.service.yql({from: "search.images"})
@@ -15,6 +16,7 @@ $.Model.extend("Srchr.Models.Yahoo",{
 },{
 	
 });
+
 
 
 });
