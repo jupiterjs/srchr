@@ -1,6 +1,7 @@
 steal.plugins('jquery/controller',
 	'jquery/model/list/cookie',
-	'jquery/view/ejs').then(function($){
+	'jquery/view/ejs',
+	'jquery/controller/view').then(function($){
 
 /**
  * Provides a cookie-stored list of model instances. 
