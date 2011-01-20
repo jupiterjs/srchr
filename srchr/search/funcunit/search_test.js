@@ -16,7 +16,7 @@ steal.plugins("funcunit").then(function(){
 			ok(!S('input[name=query]').val().length, 'Text field is empty!')
 		})
 		
-		S('html').click( function(){
+		S('input[type=checkbox]').click( function(){
 			
 			
 			ok(S('input[name=query]').val(), 'Text field is filled!')
