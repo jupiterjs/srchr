@@ -1,6 +1,7 @@
 steal.plugins('jquery/controller',
 	'jquery/dom/form_params',
-	'jquery/view/ejs')
+	'jquery/view/ejs',
+	'jquery/controller/view')
 	.css('search')
 .then(
 	"//srchr/models/search",

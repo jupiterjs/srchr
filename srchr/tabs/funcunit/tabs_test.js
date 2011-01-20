@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 module("srchr/tabs",{
 	setup : function(){
 		S.open('//srchr/tabs/tabs.html')
-=======
-module("srchr/search_result", {
-	setup: function() {
-		S.open('//srchr/tabs/tabs.html');
->>>>>>> f0a709ee64fce3a58fce8c0b5a28b87f5f25a38f
 	}
 });
 
