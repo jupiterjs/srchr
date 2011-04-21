@@ -20,7 +20,7 @@ steal.plugins('jquery/controller', 'jquery/event/default').then(function( $ ) {
 		 * Initialize a new Disabler controller.
 		 */
 		init: function() {
-			this.bind(this.options.listenTo, "search.created", "checkTypes");
+			this.bind(this.options.listenTo, "search", "checkTypes");
 		},
 
 		/**

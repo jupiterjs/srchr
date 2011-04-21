@@ -34,7 +34,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 * @param {Object} ev The event that was called.
 	 * @param {Object} searchInst The search instance to get results for.
 	 */
-	"created": function(el, ev, searchInst){
+	"search": function(el, ev, searchInst){
 		this.currentSearch = searchInst.query;
 		
 		if (this.element.is(':visible')){

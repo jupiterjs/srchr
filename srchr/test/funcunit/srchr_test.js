@@ -14,7 +14,7 @@ module("srchr", {
 
 test('Search shows results in selected service', function(){
 	
-	S('input[value=Srchr.Models.Yahoo]').click();
+	S('input[value=Srchr\\.Models\\.Yahoo]').click();
 	S('#query').click().type('Dogs\r');
 	
 	// wait until there are 2 results
@@ -34,8 +34,8 @@ test('Search shows results in selected service', function(){
 })
 
 test('Switching results tabs', function(){
-	S('input[value=Srchr.Models.Yahoo]').click();
-	S('input[value=Srchr.Models.Flickr]').click();
+	S('input[value=Srchr\\.Models\\.Yahoo]').click();
+	S('input[value=Srchr\\.Models\\.Flickr]').click();
 	
 	S('#query').click().type('Cats\r');
 	

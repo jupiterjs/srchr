@@ -1,6 +1,7 @@
 steal.plugins('jquery/controller',
 	'jquery/dom/form_params',
-	'jquery/view/ejs')
+	'jquery/view/ejs',
+	'jquery/controller/view')
 	.css('search')
 .then(
 	"//srchr/models/search",
@@ -110,7 +111,7 @@ $.Controller.extend("Srchr.Search",
 		this.find("input[name=query]").val(data.query)[0].focus();
 		var checks = this.find("input[type=checkbox]").attr("checked",false);
 		for(var i =0; i < data.types.length; i++){
-			checks.filter("[value="+data.types[i]+"]").attr("checked",true);
+			checks.filter("[value="+data.types[i].replace(/\./g,"\\.")+"]").attr("checked",true);
 		}
 		
 		this.element.trigger('search', data);

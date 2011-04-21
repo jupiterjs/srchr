@@ -8,7 +8,7 @@ $.Model.extend("Srchr.Models.Yahoo",{
 
 		// convert our query param for use in the flickr service
 		yahoo.findAll.call( this,
-			{where: ["query='#{query}'",params]}, 
+			{where: ["query='#{query}' and appid='YahooDemo'",params]}, 
 			success, 
 			error);
 		
