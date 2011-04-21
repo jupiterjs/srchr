@@ -1,4 +1,6 @@
-steal.plugins('jquery/controller','jquery/view/ejs').then(function($){
+steal.plugins('jquery/controller',
+	'jquery/view/ejs',
+	'jquery/controller/view').then(function($){
 	
 /**
  * Shows the search results of a query.
