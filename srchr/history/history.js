@@ -25,7 +25,7 @@ $.Controller.extend("Srchr.History",
 	/**
 	 * Waits for the page to be loaded
 	 */
-	ready : function(){
+	init : function(){
 		this.instances = new $.Model.List.Cookie([]).retrieve(this.options.storeName);
 		this.append(this.instances);
 		
