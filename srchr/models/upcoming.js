@@ -1,5 +1,5 @@
 
-steal.plugins("jquery/model/service/yql").then(function(){
+steal("jquery/model/service/yql").then(function(){
 
 //get a yql service for upcoming events
 var upcoming = $.Model.service.yql({from: "upcoming.events"})

@@ -1,4 +1,4 @@
-steal.plugins('jquery/controller',
+steal('jquery/controller',
 	'jquery/view/ejs',
 	'jquery/controller/view').then(function($){
 	
@@ -16,27 +16,14 @@ $.Controller.extend("Srchr.SearchResult",
 	listensTo : ["show"]
 },
 /* @prototype */
-{
-	/**
-	 * Initializes a new instance of Search Results container.
-	 * @codestart
-	 * $(selector).srchr_search_result({
-	 *	modelType : Srchr.Models.Google,
-	 *  listenTo : $('#searchBox')
-	 * })
-	 * @codeend
-	 */
-	init: function(element, options){
-		this.bind(this.options.listenTo, "search", "search");
-	},
-	
+{	
 	/**
 	 * If the results panel is visible, then get the results.
 	 * @param {Object} el The element that the event was called on.
 	 * @param {Object} ev The event that was called.
 	 * @param {Object} searchInst The search instance to get results for.
 	 */
-	"search": function(el, ev, searchInst){
+	"{listenTo} search": function(el, ev, searchInst){
 		this.currentSearch = searchInst.query;
 		
 		if (this.element.is(':visible')){

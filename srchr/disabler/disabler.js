@@ -1,4 +1,4 @@
-steal.plugins('jquery/controller', 'jquery/event/default').then(function( $ ) {
+steal('jquery/controller', 'jquery/event/default').then(function( $ ) {
 
 	/**
 	 * Disables tabs and prevents default behavior.
@@ -17,13 +17,6 @@ steal.plugins('jquery/controller', 'jquery/event/default').then(function( $ ) {
 	/* @prototype */
 	{
 		/**
-		 * Initialize a new Disabler controller.
-		 */
-		init: function() {
-			this.bind(this.options.listenTo, "search", "checkTypes");
-		},
-
-		/**
 		 * Binds {activateSelector} to the "activate" event to prevent the default behavior if it has the 'disabled' class.
 		 * @param {Object} el The element to prevent the default behavior on.
 		 * @param {Object} ev The event to prevent.
@@ -41,13 +34,13 @@ steal.plugins('jquery/controller', 'jquery/event/default').then(function( $ ) {
 		 * @param {Object} ev The event that was called.
 		 * @param {Object} data The data that was passed to the event.
 		 */
-		checkTypes: function( el, ev, data ) {
-
+		"{listenTo} search": function( el, ev, data ) {
 			var types = {},
 				first = true;
 
 			// Fill the list of types to check against.
 			$.each(data.types, function( index, type ) {
+				
 				// Model types come in as Srchr.Model.typeName, so just get the last part
 				types[type.split('.').pop()] = true;
 			});

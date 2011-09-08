@@ -1,5 +1,5 @@
 
-steal.plugins("jquery/model/service/yql").then(function(){
+steal("jquery/model/service/yql").then(function(){
 //get the yql service
 var flickr = $.Model.service.yql({from: "flickr.photos.search"})
 

@@ -1,4 +1,4 @@
-steal.plugins('jquery/controller',
+steal('jquery/controller',
 	'jquery/model/list/cookie',
 	'jquery/view/ejs',
 	'jquery/controller/view').then(function($){

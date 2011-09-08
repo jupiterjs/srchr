@@ -1,12 +1,13 @@
 // Load all of the plugin dependencies
-steal.plugins('srchr/search',
+steal('srchr/search',
 	'srchr/history',
 	'srchr/search_result',
 	'srchr/tabs',
-	'srchr/disabler')
-	.models('flickr','yahoo','upcoming','twitter')
+	'srchr/disabler',
+	'steal/less',
+	'srchr/models/flickr.js','srchr/models/yahoo.js','srchr/models/upcoming.js','srchr/models/twitter.js')
 		
-.then(function($){
+.then('srchr/srchr.less', function($){
 	
 	// This is the Srchr application.  It intergrates all of the Srchr modules.
 	
@@ -18,7 +19,8 @@ steal.plugins('srchr/search',
 	var typePrettyNames = {
 		"Srchr.Models.Flickr" : "f",
 		"Srchr.Models.Yahoo" : "y",
-		"Srchr.Models.Upcoming" : "u"
+		"Srchr.Models.Upcoming" : "u",
+		"Srchr.Models.Twitter" : "t"
 	};
 	
 	// Create a new History controller on the #history element
@@ -67,5 +69,6 @@ steal.plugins('srchr/search',
 		modelType : Srchr.Models.Twitter,
 		resultView : "//srchr/views/twitter.ejs"
 	});
+	
 	
 });

@@ -1,4 +1,4 @@
-steal.plugins("jquery/model/service/twitter").then(function(){
+steal("jquery/model/service/twitter").then(function(){
 //get the yql service
 var twitterSearch = $.Model.service.twitter({from: "search.json",
 url: "http://search.twitter.com/"})

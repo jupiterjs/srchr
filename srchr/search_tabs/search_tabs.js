@@ -1,4 +1,4 @@
-steal.plugins('//srchr/tabs', '//srchr/disabler')
+steal('srchr/tabs', 'srchr/disabler')
 
 .then(function( $ ) {
 

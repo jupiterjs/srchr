@@ -1,10 +1,9 @@
-steal.plugins('jquery/controller',
+steal('jquery/controller',
 	'jquery/dom/form_params',
 	'jquery/view/ejs',
-	'jquery/controller/view')
-	.css('search')
+	'jquery/controller/view', './search.css')
 .then(
-	"//srchr/models/search",
+	"srchr/models/search.js",
 	function($){
 
 /**
@@ -99,7 +98,7 @@ $.Controller.extend("Srchr.Search",
 	/**
 	 * Focuses on the search query box on page load.
 	 */
-	load : function(){
+	"{document} load" : function(){
 		//if we are attached when the page loads, focus on our element
 		this.find("input[name=query]")[0].focus();
 	},

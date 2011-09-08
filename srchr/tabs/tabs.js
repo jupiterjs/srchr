@@ -1,4 +1,4 @@
-steal.plugins('jquery/controller', 'jquery/event/default').css('tabs').then(function() {
+steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function() {
 
 	/**
 	 * A basic tabs controller for showing and hiding content.
