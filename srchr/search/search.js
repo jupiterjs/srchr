@@ -1,9 +1,10 @@
 steal('jquery/controller',
 	'jquery/dom/form_params',
 	'jquery/view/ejs',
-	'jquery/controller/view', './search.css')
+	'jquery/controller/view',
+	'steal/less')
 .then(
-	"srchr/models/search.js",
+	"srchr/models/search.js", './search.less',
 	function($){
 
 /**

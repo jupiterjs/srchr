@@ -1,6 +1,7 @@
 steal('jquery/controller',
 	'jquery/view/ejs',
-	'jquery/controller/view').then(function($){
+	'jquery/controller/view',
+	'steal/less').then('./search_result.less', function($){
 	
 /**
  * Shows the search results of a query.

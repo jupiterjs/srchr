@@ -1,7 +1,8 @@
 steal('jquery/controller',
 	'jquery/model/list/cookie',
 	'jquery/view/ejs',
-	'jquery/controller/view').then(function($){
+	'jquery/controller/view',
+	'steal/less').then('./history.less', function($){
 
 /**
  * Provides a cookie-stored list of model instances. 

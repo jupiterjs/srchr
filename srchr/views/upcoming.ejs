@@ -1,3 +1,8 @@
-
-	<h2><a href='<%= url %>'><%= name%></a></h2>
-	<p><img src='<%= photo_url %>' /><%=description%></p>
+<h2><a href='<%= url %>'><%= name%></a></h2>
+<p>
+  <% if(this.photo_url && this.photo_url != ""){%>
+    <img src='<%= photo_url %>' />
+  <%}%>
+  <%=description%>
+</p>
+<div class="clear"></div>

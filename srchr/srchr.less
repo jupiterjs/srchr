@@ -1,5 +1,6 @@
 body {
-  font-family:verdana;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  margin: 0;
 }
 
 .error {
@@ -15,47 +16,47 @@ td {
   padding:3px;
 }
 
-#srchr {
-  width:960px;
-  margin:40px auto 0;
-}
-
-#query {
-  font-size:1.25em;
-  width:420px;
-}
-
-.options {
-  float:right;
-  list-style:none;
-  font-size:1.4em;
-  width:400px;
-  margin:0;
-}
 
 #history-results-container {
-  clear:both;
-  position:relative;
+  position: absolute;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
 }
 
 #history-container {
-  float:left;
-  width:200px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  background: #ddd;
 }
 
-#history {
-  border:1px solid #F6A828;
-  margin-top:57px;
+
+h3 {
+  color: #222;
+  text-shadow: 0px 1px #eee;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 2px 20px 0 20px;
+  border-bottom: 1px solid #aaa;
+  font-size: 12px;
+  line-height: 25px;
+  background: #ccc;
+  
 }
 
 #results-container {
-  float:left;
-  width:570px;
-  margin:0 0 0 30px;
-}
-
-#results-container .srchr_search_result,#history {
-  min-height:300px;
+  position: absolute;
+  left: 200px;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  border-left: 1px solid #aaa;
+  background: #e0e0e0;
 }
 
 .srchr_history .search {
@@ -63,9 +64,18 @@ td {
 }
 
 .disabled a {
-  color:#333!important;
+  color:#bbb!important;
 }
 
 input[type="submit"] {
   font-size:1.25em;
+}
+
+.clear {
+  clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
