@@ -6,7 +6,6 @@ steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function()
 	 * @codestart
 	 &lt;ul id='resultsTab'&gt;
 	 &lt;li&gt;&lt;a href='#flickr'&gt;Flickr&lt;/a&gt;&lt;/li&gt;
-	 &lt;li&gt;&lt;a href='#yahoo'&gt;Yahoo&lt;/a&gt;&lt;/li&gt;
 	 &lt;li&gt;&lt;a href='#upcoming'&gt;Upcoming&lt;/a&gt;&lt;/li&gt;
 	 &lt;/ul&gt;
 	 

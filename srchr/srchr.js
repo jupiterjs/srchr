@@ -5,7 +5,7 @@ steal('srchr/search',
 	'srchr/tabs',
 	'srchr/disabler',
 	'steal/less',
-	'srchr/models/flickr.js','srchr/models/yahoo.js','srchr/models/upcoming.js','srchr/models/twitter.js')
+	'srchr/models/flickr.js','srchr/models/upcoming.js','srchr/models/twitter.js')
 		
 .then('srchr/srchr.less', function($){
 	
@@ -18,7 +18,6 @@ steal('srchr/search',
 	// just print out the first letter
 	var typePrettyNames = {
 		"Srchr.Models.Flickr" : "f",
-		"Srchr.Models.Yahoo" : "y",
 		"Srchr.Models.Upcoming" : "u",
 		"Srchr.Models.Twitter" : "t"
 	};
@@ -50,12 +49,6 @@ steal('srchr/search',
 	$("#flickr").srchr_search_result({
 		modelType : Srchr.Models.Flickr,
 		resultView : "//srchr/views/flickr.ejs"
-	});
-	
-	// Create new Search Results controller on the #yahoo element
-	$("#yahoo").srchr_search_result({
-		modelType : Srchr.Models.Yahoo,
-		resultView : "//srchr/views/yahoo.ejs"
 	});
 	
 	// Create new Search Results controller on the #upcoming element

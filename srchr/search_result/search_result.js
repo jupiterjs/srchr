@@ -49,7 +49,7 @@ $.Controller.extend("Srchr.SearchResult",
 			// and our search is new ...
 			if(this.searched != this.currentSearch){
 				// put placeholder text in the panel...
-				this.element.html("Searching for "+this.currentSearch);
+				this.element.html("Searching for <b>"+this.currentSearch+"</b>");
 				// and set a callback to render the results.
 				this.options.modelType.findAll({query: this.currentSearch}, this.callback('renderResults'));
 				this.searched = this.currentSearch;
@@ -67,7 +67,13 @@ $.Controller.extend("Srchr.SearchResult",
 	 * @param {Object} data The data to bind.
 	 */
 	renderResults: function(data){
-		this.element.html(this.view('results',{data: data, options: this.options }));
+		if(data.length > 0){
+			this.element.html(this.view('results',{data: data, options: this.options }));
+		} else {
+			this.element.html("No data found for <b>" + this.currentSearch + "</b>")
+		
+		}
+		
 	}
 });
 	
