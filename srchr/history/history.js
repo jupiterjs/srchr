@@ -9,7 +9,7 @@ steal('jquery/controller',
  * It allows you to remove these items from the list. 
  * @tag controllers, home
  */
-$.Controller.extend("Srchr.History",
+$.Controller("Srchr.History",
 /* @static */
 {
 	defaults : {

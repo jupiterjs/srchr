@@ -22,7 +22,7 @@ steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function()
 	 * 
 	 * @tag controllers, home
 	 */
-	$.Controller.extend("Srchr.Tabs",
+	$.Controller("Srchr.Tabs",
 	/* @prototype */
 	{
 

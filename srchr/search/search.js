@@ -12,7 +12,7 @@ steal('jquery/controller',
  * 
  * @tag controllers, home
  */
-$.Controller.extend("Srchr.Search",
+$.Controller("Srchr.Search",
 /* @static */
 {
 	defaults : {
@@ -67,7 +67,7 @@ $.Controller.extend("Srchr.Search",
 		
 		// If everything is valid, trigger search.created
 		if(ok){
-			el.trigger("search",search);
+			$([Srchr.Models.Search]).trigger("search",search);
 		}
 		
 		
@@ -114,7 +114,7 @@ $.Controller.extend("Srchr.Search",
 			checks.filter("[value="+data.types[i].replace(/\./g,"\\.")+"]").attr("checked",true);
 		}
 		
-		this.element.trigger('search', data);
+		$([Srchr.Models.Search]).trigger('search', data);
 	}
 });
 

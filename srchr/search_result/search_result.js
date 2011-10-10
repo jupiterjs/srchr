@@ -1,17 +1,17 @@
 steal('jquery/controller',
 	'jquery/view/ejs',
 	'jquery/controller/view',
+	'srchr/models/search.js',
 	'steal/less').then('./search_result.less', function($){
 	
 /**
  * Shows the search results of a query.
  * @tag controllers, home
  */
-$.Controller.extend("Srchr.SearchResult",
+$.Controller("Srchr.SearchResult",
 /* @static */
 {
 	defaults: {
-		listenTo : document.documentElement,
 		resultView : "//srchr/search_result/views/result.ejs"
 	},
 	listensTo : ["show"]
@@ -24,7 +24,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 * @param {Object} ev The event that was called.
 	 * @param {Object} searchInst The search instance to get results for.
 	 */
-	"{listenTo} search": function(el, ev, searchInst){
+	"{Srchr.Models.Search} search": function(el, ev, searchInst){
 		this.currentSearch = searchInst.query;
 		
 		if (this.element.is(':visible')){
@@ -67,7 +67,7 @@ $.Controller.extend("Srchr.SearchResult",
 	 * @param {Object} data The data to bind.
 	 */
 	renderResults: function(data){
-		if(data.length > 0){
+		if(data && data.length > 0){
 			this.element.html(this.view('results',{data: data, options: this.options }));
 		} else {
 			this.element.html("No data found for <b>" + this.currentSearch + "</b>")

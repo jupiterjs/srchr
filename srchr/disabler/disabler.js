@@ -1,4 +1,4 @@
-steal('jquery/controller', 'jquery/event/default').then(function( $ ) {
+steal('jquery/controller', 'jquery/event/default', 'srchr/models/search.js').then(function( $ ) {
 
 	/**
 	 * Disables tabs and prevents default behavior.
@@ -6,12 +6,11 @@ steal('jquery/controller', 'jquery/event/default').then(function( $ ) {
 	 * and also will prevent clicking on it.
 	 * @tag controllers, home
 	 */
-	$.Controller.extend("Srchr.Disabler",
+	$.Controller("Srchr.Disabler",
 	/* @static */
 	{
 		defaults: {
-			activateSelector: "li",
-			listenTo: document.documentElement
+			activateSelector: "li"
 		}
 	},
 	/* @prototype */
@@ -34,7 +33,7 @@ steal('jquery/controller', 'jquery/event/default').then(function( $ ) {
 		 * @param {Object} ev The event that was called.
 		 * @param {Object} data The data that was passed to the event.
 		 */
-		"{listenTo} search": function( el, ev, data ) {
+		"{Srchr.Models.Search} search": function( el, ev, data ) {
 			var types = {},
 				first = true;
 

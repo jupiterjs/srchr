@@ -1,26 +1,31 @@
 // Load all of the plugin dependencies
-steal('srchr/search',
+steal(
+	'srchr/search',
 	'srchr/history',
 	'srchr/search_result',
 	'srchr/tabs',
 	'srchr/disabler',
 	'steal/less',
-	'srchr/models/flickr.js','srchr/models/upcoming.js','srchr/models/twitter.js')
-		
-.then('srchr/srchr.less', function($){
+	'srchr/models/search.js', 
+	'srchr/models/flickr.js',
+	'srchr/models/upcoming.js',
+	'srchr/models/twitter.js'
+).then('srchr/srchr.less', function($){
 	
 	// This is the Srchr application.  It intergrates all of the Srchr modules.
 	
+	var typePrettyNames = {
+		    "Srchr.Models.Flickr"   : "f",
+		    "Srchr.Models.Upcoming" : "u",
+		    "Srchr.Models.Twitter"  : "t"
+			};
+	    
 	// Create a new Search controller on the #searchArea element
 	$("#searchArea").srchr_search();
 	
 	// Instead of printing out the Model names in their entirety in the history list,
 	// just print out the first letter
-	var typePrettyNames = {
-		"Srchr.Models.Flickr" : "f",
-		"Srchr.Models.Upcoming" : "u",
-		"Srchr.Models.Twitter" : "t"
-	};
+	
 	
 	// Create a new History controller on the #history element
 	$("#history").srchr_history({
@@ -34,7 +39,7 @@ steal('srchr/search',
 		}
 	});
 	// when a search happens, add to history
-	$("#searchArea").bind("search", function(ev, search){
+	$([Srchr.Models.Search]).bind("search", function(ev, search){
 		$("#history").srchr_history("add", search);
 	});
 	// when a history item is selected, update search

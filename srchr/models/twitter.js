@@ -3,7 +3,7 @@ steal("jquery/model/service/twitter").then(function(){
 var twitterSearch = $.Model.service.twitter({from: "search.json",
 url: "http://search.twitter.com/"})
 
-$.Model.extend("Srchr.Models.Twitter",{
+$.Model("Srchr.Models.Twitter",{
 	findAll : function(params, success, error){
 
 		// convert our query param for use in the flickr service

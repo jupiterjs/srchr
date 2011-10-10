@@ -1,21 +1,26 @@
-
-steal("jquery/model/service/yql").then(function(){
-//get the yql service
-var flickr = $.Model.service.yql({from: "flickr.photos.search"})
-
-$.Model.extend("Srchr.Models.Flickr",{
+steal('jquery/model', function(){
+	
+$.Model('Srchr.Models.Flickr',{
 	findAll : function(params, success, error){
-		// convert our query param for use in the flickr service
+		return $.ajax({
+			url : "http://query.yahooapis.com/v1/public/yql",
+			dataType : "jsonp",
+			data : {
+				q: $.String.sub("SELECT * FROM flickr.photos.search WHERE has_geo='true' AND text='{query}'", params),
+				format: "json",
+				env: "store://datatables.org/alltableswithkeys",
+				callback: "?"
+			},
+			dataType : 'jsonp flickr.models',
+			success : success,
+			error : error
+		})
 		
-		flickr.findAll.call(this, //returns instances of Flickr
-			
-			{ where: ["has_geo='true' AND text='#{query}'",params] }, 
-			success, 
-			error);
-
+	},
+	models : function(data){
+		return this._super(data.query.flickr)
 	}
-},{})
-
+},{});
 
 });
 

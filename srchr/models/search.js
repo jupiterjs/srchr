@@ -1,5 +1,5 @@
 steal('jquery/model').then(function() {
-	$.Model.extend("Srchr.Models.Search", {
+	$.Model("Srchr.Models.Search", {
 		id: "query"
 	}, {});
 })
