@@ -1,17 +1,20 @@
-steal("jquery/model/service/twitter").then(function(){
-//get the yql service
-var twitterSearch = $.Model.service.twitter({from: "search.json",
-url: "http://search.twitter.com/"})
+steal("jquery/model").then(function(){
 
 $.Model("Srchr.Models.Twitter",{
 	findAll : function(params, success, error){
-
-		// convert our query param for use in the flickr service
-		twitterSearch.findAll.call( this,
-			{where: {q: params.query}}, 
-			success, 
-			error);
-		
+		return $.ajax({
+			url : "http://search.twitter.com/search.json",
+			dataType : "jsonp",
+			data: {
+				q: params.query
+			},
+			dataType : 'jsonp twitter.models',
+			success : success,
+			error : error
+		})
+	},
+	models : function(data){
+		return this._super(data.results)
 	}
 },{
 	
