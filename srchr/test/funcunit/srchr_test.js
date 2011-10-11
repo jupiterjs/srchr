@@ -3,10 +3,10 @@ module("srchr", {
         S.open("//srchr/srchr.html");
 	},
 	checkYahooOnlyResults : function(){
-		ok(S('#yahoo').html(), 'Results were retrieved.')
-		ok(S('#resultsTab li:eq(0)').hasClass('disabled'), "Non-selected tab Flickr is disabled.")
-		ok(!S('#resultsTab li:eq(1)').hasClass('disabled'), "Selected tab Yahoo is enabled.")
-		ok(S('#resultsTab li:eq(2)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
+		ok(S('#flickr').html(), 'Results were retrieved.')
+		ok(!S('#resultsTab li:eq(0)').hasClass('disabled'), "Selected tab Twitter is enabled.")
+		ok(S('#resultsTab li:eq(1)').hasClass('disabled'), "Non-selected tab Upcoming is disabled.")
+		ok(S('#resultsTab li:eq(2)').hasClass('disabled'), "Non-selected tab Flickr is disabled.")
 	}
 });
 
@@ -14,18 +14,21 @@ module("srchr", {
 
 test('Search shows results in selected service', function(){
 	
-	S('input[value=Srchr\\.Models\\.Yahoo]').click();
+	S('input[value=Srchr\\.Models\\.Twitter]').click();
 	S('#query').click().type('Dogs\r');
 	
 	// wait until there are 2 results
-	S("#yahoo li").exists( function(){
+	S("#twitter li").exists( function(){
 		
-		ok(true, "We see results in yahoo");
+		ok(true, "We see results in twitter");
 		// make sure we see dogs in the history
-		equals(S("#history .search .text").text() , "Dogs y", "we see dogs correctly");
+		
+		var r = /Dogs\st/;
+		
+		ok(r.test(S("#history .search .text").text()), "we see dogs correctly");
 		
 		// make sure flickr and everyone else is diabled
-		ok(S('#resultsTab li:eq(0)').hasClass('disabled'), "Flickr is disabled.");
+		ok(S('#resultsTab li:eq(1)').hasClass('disabled'), "Flickr is disabled.");
 		ok(S('#resultsTab li:eq(2)').hasClass('disabled'), "Upcoming is disabled.");
 	}); 
 	
@@ -34,23 +37,20 @@ test('Search shows results in selected service', function(){
 })
 
 test('Switching results tabs', function(){
-	S('input[value=Srchr\\.Models\\.Yahoo]').click();
+	S('input[value=Srchr\\.Models\\.Twitter]').click();
 	S('input[value=Srchr\\.Models\\.Flickr]').click();
 	
 	S('#query').click().type('Cats\r');
 	
-	S("#flickr li").exists( function(){
+	S("#twitter li").exists( function(){
 	
+		equals(S('#twitter').css('display'), 'block', 'Twitter results panel is visible')
+		
+	})
+	
+	S('#resultsTab li:eq(2) a').exists().click(function(){
+		equals(S('#twitter').css('display'), 'none', 'Twitter results panel is hidden')
 		equals(S('#flickr').css('display'), 'block', 'Flickr results panel is visible')
-		
-		S('#resultsTab li:eq(1)').click(function(){
-			
-			equals(S('#flickr').css('display'), 'none', 'Flickr results panel is hidden')
-			
-			equals(S('#yahoo').css('display'), 'block', 'Yahoo results panel is visible')
-		})
-		
-		
 	})
 })
 
@@ -58,8 +58,8 @@ test('Clicking history entries re-creates the search', function(){
 	S('.srchr_models_search_Dogs').click(function(){
 		equals(S('#query').val(), "Dogs", 'Dogs was put back into the query field')
 	});
-	S("#yahoo li").exists( function(){
-		ok(true, "We see results in yahoo");
+	S("#twitter li").exists( function(){
+		ok(true, "We see results in twitter");
 	})
 })
 
