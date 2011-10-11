@@ -53,24 +53,34 @@
                 src='../../steal/steal.js?srchr/disabler'>   
         </script>
 		<script type="text/javascript">
-			$('#resultsTab').srchr_disabler();
 			
-			$('button').click(function(){
-				$(document.documentElement).trigger('search.created', { types : ['Srchr.Models.Flickr']})
-			})
-			
-			$('li')
-				.live('click',function(ev){
-					ev.preventDefault();
-					$(this).trigger('activate');
-				})
-				.live('default.activate', function(){
-					$('#out').html('Activated '+$(this).text())
-				})
 				
 			
 			
 		</script>
+		
+		<script type='text/javascript' src='../../steal/steal.js'></script>
+		<script type='text/javascript'>
+			steal('srchr/disabler',function(){
+				
+				$('#resultsTab').srchr_disabler();
+
+  			$('button').click(function(){
+  				$([Srchr.Models.Search]).trigger('search', { types : ['Srchr.Models.Flickr']})
+  			})
+
+  			$('li')
+  				.live('click',function(ev){
+  					ev.preventDefault();
+  					$(this).trigger('activate');
+  				})
+  				.live('default.activate', function(){
+  					$('#out').html('Activated '+$(this).text())
+  				})
+			})
+		</script>
+		
+		
 		
 	</body>
 </html>

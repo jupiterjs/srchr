@@ -27,24 +27,26 @@
 		<p>Finally, click 'Set Search To Foo', to set the search to Foo and trigger a search.</p>
 		<a href='javascript://' id='set'>Set Search To Foo</a>
 		<script type='text/javascript' 
-                src='../../steal/steal.js?srchr/search'>   
+                src='../../steal/steal.js'>   
         </script>
 		<script type='text/javascript'>
-			
-			
-			
-			$('#content').srchr_search()
-				.bind("search", function(ev, data){
-					$('#results').hide().html('Search Created '+data.query).fadeIn();
-				});
-				
-			$("#set").click(function(){
-				var search = new Srchr.Models.Search({
-					query: "foo", 
-					types : ["Srchr.Models.Yahoo"]
-				})
-				$('#content').srchr_search("val",search);
+			steal('srchr/search', function(){
+			  $('#content').srchr_search();
+  			$([Srchr.Models.Search]).bind("search", function(ev, data){
+  				$('#results').hide().html('Search Created '+data.query).fadeIn();
+  			});
+
+  			$("#set").click(function(){
+  				var search = new Srchr.Models.Search({
+  					query: "foo", 
+  					types : ["Srchr.Models.Yahoo"]
+  				})
+  				$('#content').srchr_search("val",search);
+  			})
 			})
+			
+			
+			
 		</script>
 	</body>
 </html>

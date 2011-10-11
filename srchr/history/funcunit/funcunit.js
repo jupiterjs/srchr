@@ -1,1 +1,1 @@
-steal.plugins("funcunit").then('history_test')
+steal("funcunit").then('./history_test.js')

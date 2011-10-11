@@ -45,45 +45,48 @@
 		
 		
 		<script type='text/javascript' 
-                src='../../steal/steal.js?srchr/search_result'>   
+                src='../../steal/steal.js'>   
         </script>
 		<script type='text/javascript'>
-			SEARCHNUM = 0;
-			Google = {
-				findAll : function(q, success){
-					var results = [];
-					var length = parseInt( Math.random()*10+1 );
-					for(var i =0; i < length; i++){
-						results.push({
-							title : i+"th search result for "+q.query,
-							text : "foo bar baz",
-							href : "http://blah.com/"+i
-						})
-					}
-					SEARCHNUM++;
-					$("#searchNum").html(SEARCHNUM)
-					success(results)
-				}
-			}
+		  steal('srchr/search_result', function(){
+		    SEARCHNUM = 0;
+  			Google = {
+  				findAll : function(q, success){
+  					var results = [];
+  					var length = parseInt( Math.random()*10+1 );
+  					for(var i =0; i < length; i++){
+  						results.push({
+  							title : i+"th search result for "+q.query,
+  							text : "foo bar baz",
+  							href : "http://blah.com/"+i
+  						})
+  					}
+  					SEARCHNUM++;
+  					$("#searchNum").html(SEARCHNUM)
+  					success(results)
+  				}
+  			}
+
+  			$("#content").srchr_search_result({
+  				modelType : Google
+  			})
+  			$("#searchForm").submit(function(ev){
+  				ev.preventDefault();
+  				$([Srchr.Models.Search]).trigger("search",{
+  					query : $("#searchVal").val()
+  				});
+  			})
+  			$("#toggle").click(function(){
+  				var c =  $("#content")
+  				if(c.is(":visible")){
+  					c.hide()
+  				}else{
+  					c.show();
+  					c.trigger("show")
+  				}
+  			})
+		  })
 			
-			$("#content").srchr_search_result({
-				modelType : Google
-			})
-			$("#searchForm").submit(function(ev){
-				ev.preventDefault();
-				$("#searchForm").trigger("search.created",{
-					query : $("#searchVal").val()
-				});
-			})
-			$("#toggle").click(function(){
-				var c =  $("#content")
-				if(c.is(":visible")){
-					c.hide()
-				}else{
-					c.show();
-					c.trigger("show")
-				}
-			})
 		</script>
 	</body>
 </html>

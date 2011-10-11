@@ -9,17 +9,13 @@
 		<ul id='resultsTab'></ul>
 		
 		<script type='text/javascript' 
-                src='../../steal/steal.js?srchr/search_tabs/modelLoader.js'>
-        </script>
-		
-		<script type='text/javascript' 
-                src='../../steal/steal.js?srchr/search_tabs'>
+                src='../../steal/steal.js'>
         </script>
 		
 		<script type='text/javascript' >
-				
-			$('#resultsTab').srchr_search_tabs(Srchr.Models);
-			
+			steal('srchr/search_tabs', 'srchr/search_tabs/modelLoader.js', function(){
+			  $('#resultsTab').srchr_search_tabs(Srchr.Models);
+			})
 		</script>
 		
 	</body>

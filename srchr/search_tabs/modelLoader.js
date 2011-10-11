@@ -1,0 +1,1 @@
+steal('srchr/models/flickr.js', 'srchr/models/search.js', 'srchr/models/upcoming.js', 'srchr/models/twitter.js')

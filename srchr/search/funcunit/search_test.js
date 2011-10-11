@@ -1,4 +1,4 @@
-steal.plugins("funcunit").then(function(){
+steal("funcunit").then(function(){
 
 	module("srchr/search",{
 		setup : function(){
@@ -52,7 +52,7 @@ steal.plugins("funcunit").then(function(){
 	});
 	
 	test("Submit form with a valid query and type", function(){
-		
+		S('input[name=query]').click()
 		S('input[name=query]').type('testing...')
 		S('input[type=checkbox]:eq(0)').click();
 				

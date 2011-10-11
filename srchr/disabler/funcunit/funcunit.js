@@ -1,1 +1,1 @@
-steal.plugins("funcunit").then('disabler_test')
+steal("funcunit").then('./disabler_test.js')

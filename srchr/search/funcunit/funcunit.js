@@ -1,1 +1,1 @@
-steal.plugins("funcunit").then('search_test')
+steal("funcunit").then('./search_test.js')
