@@ -54,7 +54,7 @@ $.Controller("Srchr.Search",
 			ok = true;
 		
 		// If no search type was selected, flash the .options UL and don't trigger search.created
-		if(!search.types.length){
+		if(!search.types){
 			this.flash(this.find('.options'));
 			ok = false;
 		}
