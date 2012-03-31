@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Srchr - CanJS with jQuery</title>
+	<link rel="stylesheet" href="css/style.css"></link>
+</head>
+<body>
+	<div id="srchr">
+		<div id='searchArea'></div>
+		
+		<div id="history-results-container">
+			<div id="history-container">
+				<h3>Search History</h3>
+				<ul id="history">  </ul>
+			</div>
+			
+			<div id="results-container">
+				<h3>Results</h3>
+				
+				<ul id='resultsTabs'>
+					<li><a href='#twitter'>Twitter</a></li>
+					<li><a href='#upcoming'>Upcoming</a></li>
+					
+				</ul>
+				<div id='twitter' class="search-results"></div>
+				<div id='upcoming' class="search-results"></div>
+				
+			</div>
+		</div>
+	</div>
+
+	<script type="text/ejs" id="searchInitEJS">
+		<form action=''>
+			<ul class='options'>
+				<li>
+					<label for="cb_twitter"><input id="cb_twitter" type='checkbox' name='types[]' value='Models.Twitter'/> Twitter</label>
+				</li>
+				<li>
+					<label for="cb_upcoming"><input id="cb_upcoming" type='checkbox' name='types[]' value='Models.Upcoming'/> Upcoming</label>
+				</li>
+			</ul>
+			<input type='text' value='<%=defaultText%>' name='query' id="query" class='blurred'/>
+			<input type='submit' value='search' />
+		</form>
+	</script>
+
+	<script type="text/ejs" id="searchResultsEJS">
+		<ul>
+			<%for(var i = 0 ; i < data.length; i++){%>
+				<li>
+					<%== can.view.render(options.resultView, data[i]) %>
+				</li>
+			<%}%>
+		</ul>
+	</script>
+
+	<script type="text/ejs" id="searchResultTwitterEJS">
+		<img src="<%= profile_image_url %>" /><%== text%>
+		<div class="clear"></div>
+	</script>
+
+	<script type="text/ejs" id="searchResultUpcomingEJS">
+		<h2><a href='<%= url %>'><%= name%></a></h2>
+		<p>
+			<% if(this.photo_url && this.photo_url != ""){%>
+				<img src='<%= photo_url %>' />
+			<%}%>
+			<%==description%>
+		</p>
+		<div class="clear"></div>
+	</script>
+
+	<script type="text/ejs" id="searchResultEJS">
+		A result for item <%= this.title || this.name || this.id %>
+	</script>
+
+	<script type="text/ejs" id="historyEJS">
+		<% list(history, function( search ) { %>
+			<li <%= (el)-> el.data('search', search) %>>
+				<span class='text'><%= titleHelper(search)%></span>
+				<a href='javascript://' class='remove'>X</a>
+			</li>
+		<% }) %>
+	</script>
+		
+	<script src="js/libs/jquery.1.7.1.js"></script>
+	<script src="js/libs/json.jquery.js"></script>
+	<script src="js/libs/cookie.jquery.js"></script>
+	<script src="js/libs/can.jquery.js"></script>
+	<script src="js/srchr.js"></script>
+</body>
+</html>
