@@ -61,22 +61,28 @@
 		
 		<script type='text/javascript' src='../../steal/steal.js'></script>
 		<script type='text/javascript'>
-			steal('srchr/disabler',function(){
+			steal('srchr/disabler', 'srchr/models/search.js',function(Disabler, Search){
 				
-				$('#resultsTab').srchr_disabler();
+				var current = can.compute();
+				
+				new Disabler('#resultsTab',{
+					currentSearch: current
+				})
+				
+				
 
-  			$('button').click(function(){
-  				$([Srchr.Models.Search]).trigger('search', { types : ['Srchr.Models.Flickr']})
-  			})
-
-  			$('li')
-  				.live('click',function(ev){
-  					ev.preventDefault();
-  					$(this).trigger('activate');
-  				})
-  				.live('default.activate', function(){
-  					$('#out').html('Activated '+$(this).text())
-  				})
+	  			$('button').click(function(){
+	  				current( new Search({ types : ['Srchr.Models.Flickr']}) )
+	  			})
+	
+	  			$('li')
+	  				.bind('click',function(ev){
+	  					ev.preventDefault();
+	  					$(this).trigger('activate');
+	  				})
+	  				.bind('default.activate', function(){
+	  					$('#out').html('Activated '+$(this).text())
+	  				})
 			})
 		</script>
 		

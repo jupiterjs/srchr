@@ -1,6 +1,6 @@
-steal('jquery/model', function(){
+steal('can', function(can){
 	
-$.Model('Srchr.Models.Flickr',{
+return can.Model({
 	findAll : function(params, success, error){
 		return $.ajax({
 			url : "http://query.yahooapis.com/v1/public/yql",
