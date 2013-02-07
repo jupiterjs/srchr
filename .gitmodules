@@ -1,12 +1,15 @@
+[submodule "can"]
+	path = can
+	url = git://github.com/bitovi/canjs
 [submodule "jquery"]
 	path = jquery
-	url = git@github.com:jupiterjs/jquerymx.git
+	url = git://github.com/bitovi/jquerypp.git
 [submodule "steal"]
 	path = steal
-	url = git@github.com:jupiterjs/steal.git
+	url = git://github.com/bitovi/steal.git
 [submodule "funcunit"]
 	path = funcunit
-	url = git@github.com:jupiterjs/funcunit.git
+	url = git://github.com/bitovi/funcunit.git
 [submodule "documentjs"]
 	path = documentjs
-	url = git@github.com:jupiterjs/documentjs.git
+	url = git://github.com/bitovi/documentjs.git

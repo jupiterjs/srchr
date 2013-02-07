@@ -1,4 +1,4 @@
-steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function() {
+steal('can', 'jquery/event/pause', './tabs.less', function(can) {
 
 	/**
 	 * A basic tabs controller for showing and hiding content.
@@ -22,8 +22,8 @@ steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function()
 	 * 
 	 * @tag controllers, home
 	 */
-	$.Controller("Srchr.Tabs",
-	/* @prototype */
+	return can.Control(
+	/** @prototype */
 	{
 
 		/**
@@ -31,15 +31,15 @@ steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function()
 		 * @param {Object} el The UL element to create the tabs controller on
 		 */
 		init: function( el ) {
-
 			// activate the first tab
 			this.activate($(el).children("li:first"));
 
 			// hide other tabs
 			var tab = this.tab;
-			this.element.addClass('ui-helper-clearfix').children("li:gt(0)").each(function() {
-				tab($(this)).hide();
-			});
+			this.element.addClass('tabs ui-helper-clearfix')
+				.children("li:gt(0)").each(function() {
+					tab($(this)).hide();
+				});
 		},
 
 		// helper function finds the tab for a given li
@@ -59,24 +59,17 @@ steal('jquery/controller', 'jquery/event/default', './tabs.css').then(function()
 		 */
 		"li click": function( el, ev ) {
 			ev.preventDefault();
-			el.trigger("activate");
+			var self = this;
+			el.triggerAsync("activate", function(){
+				self.activate(el);
+			});
 		},
-
-		/**
-		 * Default event handler for the "activate" event.
-		 * @param {Object} el The element to activate
-		 * @param {Object} ev The event that was fired.
-		 */
-		"li default.activate": function( el, ev ) {
-			this.activate(el);
-		},
-
 		/**
 		 * Hide all tabs, show the new one.
 		 * @param {Object} The element to show.
 		 */
 		activate: function( el ) {
-			this.tab(this.find('.active').removeClass('active')).hide();
+			this.tab(this.element.find('.active').removeClass('active')).hide();
 			this.tab(el.addClass('active')).show().trigger("show");
 		}
 	});
